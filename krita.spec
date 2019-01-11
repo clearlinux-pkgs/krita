@@ -4,7 +4,7 @@
 #
 Name     : krita
 Version  : 4.1.7.101
-Release  : 4
+Release  : 5
 URL      : https://github.com/KDE/krita/archive/v4.1.7.101.tar.gz
 Source0  : https://github.com/KDE/krita/archive/v4.1.7.101.tar.gz
 Summary  : No detailed summary available
@@ -18,6 +18,7 @@ BuildRequires : boost-dev
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
 BuildRequires : buildreq-qmake
+BuildRequires : cmake(Vc)
 BuildRequires : eigen-dev
 BuildRequires : exiv2-dev
 BuildRequires : extra-cmake-modules pkgconfig(OpenEXR)
@@ -106,7 +107,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1547231125
+export SOURCE_DATE_EPOCH=1547234990
 mkdir -p clr-build
 pushd clr-build
 %cmake ..
@@ -114,7 +115,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1547231125
+export SOURCE_DATE_EPOCH=1547234990
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
 cp COPYING %{buildroot}/usr/share/package-licenses/krita/COPYING
@@ -147,6 +148,7 @@ popd
 /usr/share/applications/krita_jpeg.desktop
 /usr/share/applications/krita_kra.desktop
 /usr/share/applications/krita_ora.desktop
+/usr/share/applications/krita_pdf.desktop
 /usr/share/applications/krita_png.desktop
 /usr/share/applications/krita_ppm.desktop
 /usr/share/applications/krita_psd.desktop
@@ -896,6 +898,7 @@ popd
 /usr/lib64/kritaplugins/kritaparticlepaintop.so
 /usr/lib64/kritaplugins/kritapatterndocker.so
 /usr/lib64/kritaplugins/kritapatterngenerator.so
+/usr/lib64/kritaplugins/kritapdfimport.so
 /usr/lib64/kritaplugins/kritaphongbumpmap.so
 /usr/lib64/kritaplugins/kritapixelizefilter.so
 /usr/lib64/kritaplugins/kritapngexport.so
