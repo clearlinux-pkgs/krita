@@ -1,5 +1,5 @@
 PKG_NAME := krita
-URL = https://github.com/KDE/krita/archive/v4.1.7.101.tar.gz
+URL = https://github.com/KDE/krita/archive/v4.1.8.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
