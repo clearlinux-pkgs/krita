@@ -4,7 +4,7 @@
 #
 Name     : krita
 Version  : 4.1.8
-Release  : 6
+Release  : 7
 URL      : https://github.com/KDE/krita/archive/v4.1.8.tar.gz
 Source0  : https://github.com/KDE/krita/archive/v4.1.8.tar.gz
 Summary  : Edit and paint images
