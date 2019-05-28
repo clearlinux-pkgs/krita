@@ -40,6 +40,7 @@ liblcms2.so.2
 libm.so.6
 libpng16.so.16
 libpoppler-qt5.so.1
+libquazip5.so.1
 libraw.so.19
 libstdc++.so.6
 libtiff.so.5
