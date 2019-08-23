@@ -4,10 +4,10 @@
 #
 Name     : krita
 Version  : 4.2.5
-Release  : 14
+Release  : 15
 URL      : https://github.com/KDE/krita/archive/v4.2.5/krita-4.2.5.tar.gz
 Source0  : https://github.com/KDE/krita/archive/v4.2.5/krita-4.2.5.tar.gz
-Summary  : Edit and paint images
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : BSD-3-Clause GPL-2.0 GPL-3.0 LGPL-2.1 Unlicense
 Requires: krita-bin = %{version}-%{release}
@@ -49,11 +49,9 @@ BuildRequires : tiff-dev
 BuildRequires : zlib-dev
 
 %description
-The icm profile files have been downloaded from the littlecms
-(http://www.littlecms.com) and from the Scarse website
-(http://www.scarse.org). The Scarse profiles have been available under
-the GPL; the littlecms profiles appear to be public domain.
-The cmyk.icm profile is taken from the GPL version jpedal.
+Without introducing some artificial compatibility layers,
+a native windows development environment (e.g. Visual Studio 2010)
+does not know about some includes known in the UNIX world.
 
 %package bin
 Summary: bin components for the krita package.
@@ -80,7 +78,6 @@ Requires: krita-lib = %{version}-%{release}
 Requires: krita-bin = %{version}-%{release}
 Requires: krita-data = %{version}-%{release}
 Provides: krita-devel = %{version}-%{release}
-Requires: krita = %{version}-%{release}
 Requires: krita = %{version}-%{release}
 
 %description dev
@@ -113,7 +110,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1564762359
+export SOURCE_DATE_EPOCH=1566533145
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -129,7 +126,7 @@ make  %{?_smp_mflags} VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1564762359
+export SOURCE_DATE_EPOCH=1566533145
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
 cp COPYING %{buildroot}/usr/share/package-licenses/krita/COPYING
@@ -149,10 +146,29 @@ popd
 
 %files
 %defattr(-,root,root,-)
+/usr/lib64/krita-python-libs/krita/__init__.py
+/usr/lib64/krita-python-libs/krita/api.py
+/usr/lib64/krita-python-libs/krita/attic/mikro.py
+/usr/lib64/krita-python-libs/krita/attic/scripter_hooks.py
+/usr/lib64/krita-python-libs/krita/decorators.py
+/usr/lib64/krita-python-libs/krita/dockwidgetfactory.py
+/usr/lib64/krita-python-libs/krita/excepthook.py
+/usr/lib64/krita-python-libs/krita/excepthook_ui.py
+/usr/lib64/krita-python-libs/krita/sceditor/__init__.py
+/usr/lib64/krita-python-libs/krita/sceditor/assist.py
+/usr/lib64/krita-python-libs/krita/sceditor/console.py
+/usr/lib64/krita-python-libs/krita/sceditor/dockwidget.py
+/usr/lib64/krita-python-libs/krita/sceditor/dockwidget_icons.py
+/usr/lib64/krita-python-libs/krita/sceditor/highlighter.py
+/usr/lib64/krita-python-libs/krita/sceditor/indenter.py
+/usr/lib64/krita-python-libs/krita/sceditor/mainwindow.py
+/usr/lib64/krita-python-libs/krita/sceditor/mainwindow_ui.py
+/usr/lib64/krita-python-libs/krita/sceditor/widget.py
 
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/krita
+/usr/bin/kritarunner
 
 %files data
 %defattr(-,root,root,-)
@@ -243,8 +259,12 @@ popd
 /usr/share/krita/actions/MoveTool.action
 /usr/share/krita/actions/PathTool.action
 /usr/share/krita/actions/SvgTextTool.action
+/usr/share/krita/actions/hello.action
 /usr/share/krita/actions/krita.action
 /usr/share/krita/actions/kritamenu.action
+/usr/share/krita/actions/plugin_importer.action
+/usr/share/krita/actions/tenbrushes.action
+/usr/share/krita/actions/tenscripts.action
 /usr/share/krita/actions/threshold.action
 /usr/share/krita/brushes/triangle.svg
 /usr/share/krita/bundles/Krita_3_Default_Resources.bundle
@@ -586,6 +606,176 @@ popd
 /usr/share/krita/preset_icons/tool_icons/wide_brush_big.png
 /usr/share/krita/preset_icons/tool_icons/wide_brush_blurry.png
 /usr/share/krita/preset_icons/tool_icons/wide_dull_round.png
+/usr/share/krita/pykrita/assignprofiledialog/Manual.html
+/usr/share/krita/pykrita/assignprofiledialog/__init__.py
+/usr/share/krita/pykrita/assignprofiledialog/assignprofiledialog.py
+/usr/share/krita/pykrita/colorspace/Manual.html
+/usr/share/krita/pykrita/colorspace/__init__.py
+/usr/share/krita/pykrita/colorspace/colorspace.py
+/usr/share/krita/pykrita/colorspace/colorspacedialog.py
+/usr/share/krita/pykrita/colorspace/components/__init__.py
+/usr/share/krita/pykrita/colorspace/components/colordepthcombobox.py
+/usr/share/krita/pykrita/colorspace/components/colormodelcombobox.py
+/usr/share/krita/pykrita/colorspace/components/colorprofilecombobox.py
+/usr/share/krita/pykrita/colorspace/resources_rc.py
+/usr/share/krita/pykrita/colorspace/uicolorspace.py
+/usr/share/krita/pykrita/comics_project_management_tools/LicenseList.csv
+/usr/share/krita/pykrita/comics_project_management_tools/README.html
+/usr/share/krita/pykrita/comics_project_management_tools/__init__.py
+/usr/share/krita/pykrita/comics_project_management_tools/comics_export_dialog.py
+/usr/share/krita/pykrita/comics_project_management_tools/comics_exporter.py
+/usr/share/krita/pykrita/comics_project_management_tools/comics_metadata_dialog.py
+/usr/share/krita/pykrita/comics_project_management_tools/comics_project_manager_docker.py
+/usr/share/krita/pykrita/comics_project_management_tools/comics_project_page_viewer.py
+/usr/share/krita/pykrita/comics_project_management_tools/comics_project_settings_dialog.py
+/usr/share/krita/pykrita/comics_project_management_tools/comics_project_setup_wizard.py
+/usr/share/krita/pykrita/comics_project_management_tools/comics_project_translation_scraper.py
+/usr/share/krita/pykrita/comics_project_management_tools/comics_template_dialog.py
+/usr/share/krita/pykrita/comics_project_management_tools/exporters/CPMT_ACBF_XML_Exporter.py
+/usr/share/krita/pykrita/comics_project_management_tools/exporters/CPMT_CoMet_XML_Exporter.py
+/usr/share/krita/pykrita/comics_project_management_tools/exporters/CPMT_Comic_Book_Info_Exporter.py
+/usr/share/krita/pykrita/comics_project_management_tools/exporters/CPMT_Comic_Rack_XML_Exporter.py
+/usr/share/krita/pykrita/comics_project_management_tools/exporters/CPMT_EPUB_exporter.py
+/usr/share/krita/pykrita/comics_project_management_tools/exporters/CPMT_po_parser.py
+/usr/share/krita/pykrita/comics_project_management_tools/exporters/__init__.py
+/usr/share/krita/pykrita/comics_project_management_tools/key_format/formats.txt
+/usr/share/krita/pykrita/comics_project_management_tools/key_rating/DC.csv
+/usr/share/krita/pykrita/comics_project_management_tools/key_rating/FictionRatingsDotCom.csv
+/usr/share/krita/pykrita/comics_project_management_tools/key_rating/Marvel.csv
+/usr/share/krita/pykrita/comics_project_management_tools/projectGenLists/listA.txt
+/usr/share/krita/pykrita/comics_project_management_tools/projectGenLists/listB.txt
+/usr/share/krita/pykrita/documenttools/Manual.html
+/usr/share/krita/pykrita/documenttools/__init__.py
+/usr/share/krita/pykrita/documenttools/documenttools.py
+/usr/share/krita/pykrita/documenttools/documenttoolsdialog.py
+/usr/share/krita/pykrita/documenttools/tools/__init__.py
+/usr/share/krita/pykrita/documenttools/tools/canvassizetool/__init__.py
+/usr/share/krita/pykrita/documenttools/tools/canvassizetool/canvassizetool.py
+/usr/share/krita/pykrita/documenttools/tools/rotatetool/__init__.py
+/usr/share/krita/pykrita/documenttools/tools/rotatetool/rotatetool.py
+/usr/share/krita/pykrita/documenttools/tools/scaletool/__init__.py
+/usr/share/krita/pykrita/documenttools/tools/scaletool/scaletool.py
+/usr/share/krita/pykrita/documenttools/uidocumenttools.py
+/usr/share/krita/pykrita/exportlayers/Manual.html
+/usr/share/krita/pykrita/exportlayers/__init__.py
+/usr/share/krita/pykrita/exportlayers/exportlayers.py
+/usr/share/krita/pykrita/exportlayers/exportlayersdialog.py
+/usr/share/krita/pykrita/exportlayers/uiexportlayers.py
+/usr/share/krita/pykrita/filtermanager/Manual.html
+/usr/share/krita/pykrita/filtermanager/__init__.py
+/usr/share/krita/pykrita/filtermanager/components/__init__.py
+/usr/share/krita/pykrita/filtermanager/components/filtercombobox.py
+/usr/share/krita/pykrita/filtermanager/components/filtermanagertreeitem.py
+/usr/share/krita/pykrita/filtermanager/components/filtermanagertreemodel.py
+/usr/share/krita/pykrita/filtermanager/filtermanager.py
+/usr/share/krita/pykrita/filtermanager/filtermanagerdialog.py
+/usr/share/krita/pykrita/filtermanager/uifiltermanager.py
+/usr/share/krita/pykrita/hello/Manual.html
+/usr/share/krita/pykrita/hello/__init__.py
+/usr/share/krita/pykrita/hello/hello.py
+/usr/share/krita/pykrita/krita_script_starter/Manual.html
+/usr/share/krita/pykrita/krita_script_starter/__init__.py
+/usr/share/krita/pykrita/krita_script_starter/bbdkss.ui
+/usr/share/krita/pykrita/krita_script_starter/krita_script_starter.py
+/usr/share/krita/pykrita/kritapykrita_assignprofiledialog.desktop
+/usr/share/krita/pykrita/kritapykrita_colorspace.desktop
+/usr/share/krita/pykrita/kritapykrita_comics_project_management_tools.desktop
+/usr/share/krita/pykrita/kritapykrita_documenttools.desktop
+/usr/share/krita/pykrita/kritapykrita_exportlayers.desktop
+/usr/share/krita/pykrita/kritapykrita_filtermanager.desktop
+/usr/share/krita/pykrita/kritapykrita_hello.desktop
+/usr/share/krita/pykrita/kritapykrita_krita_script_starter.desktop
+/usr/share/krita/pykrita/kritapykrita_lastdocumentsdocker.desktop
+/usr/share/krita/pykrita/kritapykrita_palette_docker.desktop
+/usr/share/krita/pykrita/kritapykrita_plugin_importer.desktop
+/usr/share/krita/pykrita/kritapykrita_quick_settings_docker.desktop
+/usr/share/krita/pykrita/kritapykrita_scripter.desktop
+/usr/share/krita/pykrita/kritapykrita_tenbrushes.desktop
+/usr/share/krita/pykrita/kritapykrita_tenscripts.desktop
+/usr/share/krita/pykrita/lastdocumentsdocker/Manual.html
+/usr/share/krita/pykrita/lastdocumentsdocker/__init__.py
+/usr/share/krita/pykrita/lastdocumentsdocker/lastdocumentsdocker.py
+/usr/share/krita/pykrita/lastdocumentsdocker/lastdocumentslistmodel.py
+/usr/share/krita/pykrita/palette_docker/Manual.html
+/usr/share/krita/pykrita/palette_docker/__init__.py
+/usr/share/krita/pykrita/palette_docker/palette_docker.py
+/usr/share/krita/pykrita/palette_docker/palette_exporter_gimppalette.py
+/usr/share/krita/pykrita/palette_docker/palette_exporter_inkscapeSVG.py
+/usr/share/krita/pykrita/palette_docker/palette_sortColors.py
+/usr/share/krita/pykrita/plugin_importer/__init__.py
+/usr/share/krita/pykrita/plugin_importer/manual.html
+/usr/share/krita/pykrita/plugin_importer/plugin_importer.py
+/usr/share/krita/pykrita/plugin_importer/plugin_importer_extension.py
+/usr/share/krita/pykrita/quick_settings_docker/Manual.html
+/usr/share/krita/pykrita/quick_settings_docker/__init__.py
+/usr/share/krita/pykrita/quick_settings_docker/quick_settings_docker.py
+/usr/share/krita/pykrita/scripter/Manual.html
+/usr/share/krita/pykrita/scripter/__init__.py
+/usr/share/krita/pykrita/scripter/debugcontroller.py
+/usr/share/krita/pykrita/scripter/debugger_scripter/__init__.py
+/usr/share/krita/pykrita/scripter/debugger_scripter/debugger.py
+/usr/share/krita/pykrita/scripter/debugger_scripter/debuggerformatter.py
+/usr/share/krita/pykrita/scripter/document_scripter/__init__.py
+/usr/share/krita/pykrita/scripter/document_scripter/document.py
+/usr/share/krita/pykrita/scripter/documentcontroller.py
+/usr/share/krita/pykrita/scripter/resources_rc.py
+/usr/share/krita/pykrita/scripter/scripter.py
+/usr/share/krita/pykrita/scripter/scripterdialog.py
+/usr/share/krita/pykrita/scripter/test.py
+/usr/share/krita/pykrita/scripter/ui_scripter/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/closeaction/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/closeaction/closeaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/debugaction/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/debugaction/debugaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/newaction/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/newaction/newaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/openaction/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/openaction/openaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/reloadaction/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/reloadaction/reloadaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/runaction/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/runaction/docwrapper.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/runaction/runaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/saveaction/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/saveaction/saveaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/saveasaction/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/saveasaction/saveasaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/settingsaction/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/settingsaction/fontscombobox.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/settingsaction/settingsaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/settingsaction/settingsdialog.py
+/usr/share/krita/pykrita/scripter/ui_scripter/actions/settingsaction/syntaxstylescombobox.py
+/usr/share/krita/pykrita/scripter/ui_scripter/editor/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/editor/debugarea.py
+/usr/share/krita/pykrita/scripter/ui_scripter/editor/linenumberarea.py
+/usr/share/krita/pykrita/scripter/ui_scripter/editor/pythoneditor.py
+/usr/share/krita/pykrita/scripter/ui_scripter/editor/statusbar.py
+/usr/share/krita/pykrita/scripter/ui_scripter/syntax/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/syntax/syntax.py
+/usr/share/krita/pykrita/scripter/ui_scripter/syntax/syntaxstyles.py
+/usr/share/krita/pykrita/scripter/ui_scripter/tabwidgets/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/tabwidgets/debuggerwidget/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/tabwidgets/debuggerwidget/debuggertable.py
+/usr/share/krita/pykrita/scripter/ui_scripter/tabwidgets/debuggerwidget/debuggerwidget.py
+/usr/share/krita/pykrita/scripter/ui_scripter/tabwidgets/debuggerwidget/stepaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/tabwidgets/debuggerwidget/stopaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/tabwidgets/outputwidget/__init__.py
+/usr/share/krita/pykrita/scripter/ui_scripter/tabwidgets/outputwidget/clearaction.py
+/usr/share/krita/pykrita/scripter/ui_scripter/tabwidgets/outputwidget/outputtextedit.py
+/usr/share/krita/pykrita/scripter/ui_scripter/tabwidgets/outputwidget/outputwidget.py
+/usr/share/krita/pykrita/scripter/uicontroller.py
+/usr/share/krita/pykrita/tenbrushes/Manual.html
+/usr/share/krita/pykrita/tenbrushes/__init__.py
+/usr/share/krita/pykrita/tenbrushes/dropbutton.py
+/usr/share/krita/pykrita/tenbrushes/tenbrushes.py
+/usr/share/krita/pykrita/tenbrushes/tenbrushesdialog.py
+/usr/share/krita/pykrita/tenbrushes/uitenbrushes.py
+/usr/share/krita/pykrita/tenscripts/Manual.html
+/usr/share/krita/pykrita/tenscripts/__init__.py
+/usr/share/krita/pykrita/tenscripts/tenscripts.py
+/usr/share/krita/pykrita/tenscripts/tenscriptsdialog.py
+/usr/share/krita/pykrita/tenscripts/uitenscripts.py
 /usr/share/krita/qmlthemes/default/colors.js
 /usr/share/krita/qmlthemes/default/fonts.js
 /usr/share/krita/qmlthemes/default/fonts/SourceSansPro-Black.otf
@@ -834,6 +1024,7 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/usr/lib64/krita-python-libs/PyKrita/krita.so
 /usr/lib64/kritaplugins/krita_colorspaces_extensions.so
 /usr/lib64/kritaplugins/krita_filtereffects.so
 /usr/lib64/kritaplugins/krita_flaketools.so
@@ -932,6 +1123,7 @@ popd
 /usr/lib64/kritaplugins/kritapresethistory.so
 /usr/lib64/kritaplugins/kritapsdexport.so
 /usr/lib64/kritaplugins/kritapsdimport.so
+/usr/lib64/kritaplugins/kritapykrita.so
 /usr/lib64/kritaplugins/kritaqimageioexport.so
 /usr/lib64/kritaplugins/kritaqimageioimport.so
 /usr/lib64/kritaplugins/kritaqmic.so
