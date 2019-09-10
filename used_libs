@@ -1,6 +1,8 @@
 libHalf.so.24
 libIex-2_3.so.24
 libIlmImf-2_3.so.24
+libIlmThread-2_3.so.24
+libImath-2_3.so.24
 libKF5Archive.so.5
 libKF5Completion.so.5
 libKF5ConfigCore.so.5
@@ -30,6 +32,7 @@ libQt5Xml.so.5
 libX11.so.6
 libboost_system.so.1.68.0
 libc.so.6
+libdl.so.2
 libexiv2.so.27
 libfftw3.so.3
 libgcc_s.so.1
