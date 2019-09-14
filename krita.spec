@@ -4,7 +4,7 @@
 #
 Name     : krita
 Version  : 4.2.6
-Release  : 16
+Release  : 17
 URL      : https://github.com/KDE/krita/archive/v4.2.6/krita-4.2.6.tar.gz
 Source0  : https://github.com/KDE/krita/archive/v4.2.6/krita-4.2.6.tar.gz
 Summary  : Edit and paint images
