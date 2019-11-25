@@ -4,7 +4,7 @@
 #
 Name     : krita
 Version  : 4.2.8.1
-Release  : 21
+Release  : 22
 URL      : https://github.com/KDE/krita/archive/v4.2.8.1/krita-4.2.8.1.tar.gz
 Source0  : https://github.com/KDE/krita/archive/v4.2.8.1/krita-4.2.8.1.tar.gz
 Summary  : Edit and paint images
@@ -113,7 +113,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1574711987
+export SOURCE_DATE_EPOCH=1574717168
 mkdir -p clr-build
 pushd clr-build
 # -Werror is for werrorists
@@ -130,7 +130,7 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1574711987
+export SOURCE_DATE_EPOCH=1574717168
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
 cp %{_builddir}/krita-4.2.8.1/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
