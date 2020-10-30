@@ -1,5 +1,11 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
-exiv2-dev
+PyQt5
 cmake(Vc)
+Vc-dev
+Vc-staticdev
+eigen-dev
+exiv2-dev
+poppler-dev
 quazip-dev
+sip-dev
