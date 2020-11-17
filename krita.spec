@@ -6,7 +6,7 @@
 #
 Name     : krita
 Version  : 4.4.1
-Release  : 34
+Release  : 35
 URL      : https://download.kde.org/stable/krita/4.4.1/krita-4.4.1.tar.xz
 Source0  : https://download.kde.org/stable/krita/4.4.1/krita-4.4.1.tar.xz
 Source1  : https://download.kde.org/stable/krita/4.4.1/krita-4.4.1.tar.xz.sig
@@ -131,7 +131,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1604089088
+export SOURCE_DATE_EPOCH=1605633181
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -147,7 +147,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1604089088
+export SOURCE_DATE_EPOCH=1605633181
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
 cp %{_builddir}/krita-4.4.1/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
