@@ -5,14 +5,14 @@
 # Source0 file verified with key 0xB69EB4CF7468332F (dimula73@gmail.com)
 #
 Name     : krita
-Version  : 4.4.1
-Release  : 39
-URL      : https://download.kde.org/stable/krita/4.4.1/krita-4.4.1.tar.xz
-Source0  : https://download.kde.org/stable/krita/4.4.1/krita-4.4.1.tar.xz
-Source1  : https://download.kde.org/stable/krita/4.4.1/krita-4.4.1.tar.xz.sig
+Version  : 4.4.2
+Release  : 40
+URL      : https://download.kde.org/stable/krita/4.4.2/krita-4.4.2.tar.xz
+Source0  : https://download.kde.org/stable/krita/4.4.2/krita-4.4.2.tar.xz
+Source1  : https://download.kde.org/stable/krita/4.4.2/krita-4.4.2.tar.xz.sig
 Summary  : Open source painting program
 Group    : Development/Tools
-License  : BSD-3-Clause CC-BY-SA-4.0 GPL-2.0 GPL-3.0 LGPL-2.1 Unlicense
+License  : BSD-3-Clause CC-BY-SA-4.0 GPL-2.0 GPL-3.0 LGPL-2.1 Unlicense Zlib
 Requires: krita-bin = %{version}-%{release}
 Requires: krita-data = %{version}-%{release}
 Requires: krita-lib = %{version}-%{release}
@@ -123,15 +123,15 @@ locales components for the krita package.
 
 
 %prep
-%setup -q -n krita-4.4.1
-cd %{_builddir}/krita-4.4.1
+%setup -q -n krita-4.4.2
+cd %{_builddir}/krita-4.4.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1605633181
+export SOURCE_DATE_EPOCH=1611253444
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -147,21 +147,20 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1605633181
+export SOURCE_DATE_EPOCH=1611253444
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
-cp %{_builddir}/krita-4.4.1/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/krita-4.4.1/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
-cp %{_builddir}/krita-4.4.1/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/4577cbeb3556a519433c8f3b7476c74b55f7ef7a
-cp %{_builddir}/krita-4.4.1/krita/data/aboutdata/LICENSE %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/krita-4.4.1/krita/data/patterns/dith_license.txt %{buildroot}/usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
-cp %{_builddir}/krita-4.4.1/krita/integration/LICENSE %{buildroot}/usr/share/package-licenses/krita/53f9142439f8dcfdbe792e9fad918e727699ebf4
-cp %{_builddir}/krita-4.4.1/krita/integration/kritaquicklook/LICENSE %{buildroot}/usr/share/package-licenses/krita/53f9142439f8dcfdbe792e9fad918e727699ebf4
-cp %{_builddir}/krita-4.4.1/packaging/windows/installer/license_gpl-3.0.rtf %{buildroot}/usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
-cp %{_builddir}/krita-4.4.1/plugins/generators/simplexnoise/3rdparty/c-open-simplex/LICENSE %{buildroot}/usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
-cp %{_builddir}/krita-4.4.1/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
-cp %{_builddir}/krita-4.4.1/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
-cp %{_builddir}/krita-4.4.1/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/krita-4.4.2/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/krita-4.4.2/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
+cp %{_builddir}/krita-4.4.2/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/4577cbeb3556a519433c8f3b7476c74b55f7ef7a
+cp %{_builddir}/krita-4.4.2/krita/data/aboutdata/LICENSE %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/krita-4.4.2/krita/data/patterns/dith_license.txt %{buildroot}/usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
+cp %{_builddir}/krita-4.4.2/krita/integration/3rdparty/LICENSE %{buildroot}/usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
+cp %{_builddir}/krita-4.4.2/packaging/windows/installer/license_gpl-3.0.rtf %{buildroot}/usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
+cp %{_builddir}/krita-4.4.2/plugins/generators/simplexnoise/3rdparty/c-open-simplex/LICENSE %{buildroot}/usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
+cp %{_builddir}/krita-4.4.2/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
+cp %{_builddir}/krita-4.4.2/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/krita-4.4.2/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -299,6 +298,7 @@ popd
 /usr/share/krita/bundles/Krita_4_Default_Resources.bundle
 /usr/share/krita/bundles/Krita_Artists_SeExpr_examples.bundle
 /usr/share/krita/bundles/README
+/usr/share/krita/bundles/RGBA_brushes.bundle
 /usr/share/krita/defaultpresets/colorsmudge.kpp
 /usr/share/krita/defaultpresets/complex.kpp
 /usr/share/krita/defaultpresets/curvebrush.kpp
@@ -1176,6 +1176,7 @@ popd
 /usr/lib64/kritaplugins/kritafilterop.so
 /usr/lib64/kritaplugins/kritagamutmask.so
 /usr/lib64/kritaplugins/kritagaussianhighpassfilter.so
+/usr/lib64/kritaplugins/kritagradientgenerator.so
 /usr/lib64/kritaplugins/kritagradientmap.so
 /usr/lib64/kritaplugins/kritagriddocker.so
 /usr/lib64/kritaplugins/kritagridpaintop.so
@@ -1361,10 +1362,10 @@ popd
 /usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
 /usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
 /usr/share/package-licenses/krita/4577cbeb3556a519433c8f3b7476c74b55f7ef7a
-/usr/share/package-licenses/krita/53f9142439f8dcfdbe792e9fad918e727699ebf4
 /usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 /usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
 /usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+/usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
 /usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
 /usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
 /usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
