@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xB69EB4CF7468332F (dimula73@gmail.com)
 #
 Name     : krita
-Version  : 4.4.2
-Release  : 41
-URL      : https://download.kde.org/stable/krita/4.4.2/krita-4.4.2.tar.xz
-Source0  : https://download.kde.org/stable/krita/4.4.2/krita-4.4.2.tar.xz
-Source1  : https://download.kde.org/stable/krita/4.4.2/krita-4.4.2.tar.xz.sig
+Version  : 4.4.3
+Release  : 42
+URL      : https://download.kde.org/stable/krita/4.4.3/krita-4.4.3.tar.xz
+Source0  : https://download.kde.org/stable/krita/4.4.3/krita-4.4.3.tar.xz
+Source1  : https://download.kde.org/stable/krita/4.4.3/krita-4.4.3.tar.xz.sig
 Summary  : Open source painting program
 Group    : Development/Tools
 License  : BSD-3-Clause CC-BY-SA-4.0 GPL-2.0 GPL-3.0 LGPL-2.1 Unlicense Zlib
@@ -123,15 +123,15 @@ locales components for the krita package.
 
 
 %prep
-%setup -q -n krita-4.4.2
-cd %{_builddir}/krita-4.4.2
+%setup -q -n krita-4.4.3
+cd %{_builddir}/krita-4.4.3
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1611253444
+export SOURCE_DATE_EPOCH=1618690752
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -147,20 +147,20 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1611253444
+export SOURCE_DATE_EPOCH=1618690752
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
-cp %{_builddir}/krita-4.4.2/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/krita-4.4.2/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
-cp %{_builddir}/krita-4.4.2/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/4577cbeb3556a519433c8f3b7476c74b55f7ef7a
-cp %{_builddir}/krita-4.4.2/krita/data/aboutdata/LICENSE %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/krita-4.4.2/krita/data/patterns/dith_license.txt %{buildroot}/usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
-cp %{_builddir}/krita-4.4.2/krita/integration/3rdparty/LICENSE %{buildroot}/usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
-cp %{_builddir}/krita-4.4.2/packaging/windows/installer/license_gpl-3.0.rtf %{buildroot}/usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
-cp %{_builddir}/krita-4.4.2/plugins/generators/simplexnoise/3rdparty/c-open-simplex/LICENSE %{buildroot}/usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
-cp %{_builddir}/krita-4.4.2/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
-cp %{_builddir}/krita-4.4.2/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
-cp %{_builddir}/krita-4.4.2/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/krita-4.4.3/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/krita-4.4.3/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
+cp %{_builddir}/krita-4.4.3/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/4577cbeb3556a519433c8f3b7476c74b55f7ef7a
+cp %{_builddir}/krita-4.4.3/krita/data/aboutdata/LICENSE %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/krita-4.4.3/krita/data/patterns/dith_license.txt %{buildroot}/usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
+cp %{_builddir}/krita-4.4.3/krita/integration/3rdparty/LICENSE %{buildroot}/usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
+cp %{_builddir}/krita-4.4.3/packaging/windows/installer/license_gpl-3.0.rtf %{buildroot}/usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
+cp %{_builddir}/krita-4.4.3/plugins/generators/simplexnoise/3rdparty/c-open-simplex/LICENSE %{buildroot}/usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
+cp %{_builddir}/krita-4.4.3/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
+cp %{_builddir}/krita-4.4.3/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/krita-4.4.3/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -286,7 +286,6 @@ popd
 /usr/share/krita/actions/MoveTool.action
 /usr/share/krita/actions/PathTool.action
 /usr/share/krita/actions/SvgTextTool.action
-/usr/share/krita/actions/hello.action
 /usr/share/krita/actions/krita.action
 /usr/share/krita/actions/kritamenu.action
 /usr/share/krita/actions/plugin_importer.action
@@ -768,9 +767,6 @@ popd
 /usr/share/krita/pykrita/filtermanager/filtermanager.py
 /usr/share/krita/pykrita/filtermanager/filtermanagerdialog.py
 /usr/share/krita/pykrita/filtermanager/uifiltermanager.py
-/usr/share/krita/pykrita/hello/Manual.html
-/usr/share/krita/pykrita/hello/__init__.py
-/usr/share/krita/pykrita/hello/hello.py
 /usr/share/krita/pykrita/krita_script_starter/Manual.html
 /usr/share/krita/pykrita/krita_script_starter/__init__.py
 /usr/share/krita/pykrita/krita_script_starter/bbdkss.ui
@@ -783,7 +779,6 @@ popd
 /usr/share/krita/pykrita/kritapykrita_documenttools.desktop
 /usr/share/krita/pykrita/kritapykrita_exportlayers.desktop
 /usr/share/krita/pykrita/kritapykrita_filtermanager.desktop
-/usr/share/krita/pykrita/kritapykrita_hello.desktop
 /usr/share/krita/pykrita/kritapykrita_krita_script_starter.desktop
 /usr/share/krita/pykrita/kritapykrita_lastdocumentsdocker.desktop
 /usr/share/krita/pykrita/kritapykrita_mixer_slider_docker.desktop
