@@ -6,7 +6,7 @@
 #
 Name     : krita
 Version  : 4.4.3
-Release  : 42
+Release  : 43
 URL      : https://download.kde.org/stable/krita/4.4.3/krita-4.4.3.tar.xz
 Source0  : https://download.kde.org/stable/krita/4.4.3/krita-4.4.3.tar.xz
 Source1  : https://download.kde.org/stable/krita/4.4.3/krita-4.4.3.tar.xz.sig
@@ -60,6 +60,7 @@ BuildRequires : quazip-dev
 BuildRequires : sip-dev
 BuildRequires : tiff-dev
 BuildRequires : zlib-dev
+Patch1: krita-openexr3.patch
 
 %description
 Krita is a professional FREE and open source painting program. It is made by
@@ -125,13 +126,14 @@ locales components for the krita package.
 %prep
 %setup -q -n krita-4.4.3
 cd %{_builddir}/krita-4.4.3
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1618690752
+export SOURCE_DATE_EPOCH=1622873443
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -147,7 +149,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1618690752
+export SOURCE_DATE_EPOCH=1622873443
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
 cp %{_builddir}/krita-4.4.3/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
