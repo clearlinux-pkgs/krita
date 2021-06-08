@@ -6,7 +6,7 @@
 #
 Name     : krita
 Version  : 4.4.3
-Release  : 43
+Release  : 44
 URL      : https://download.kde.org/stable/krita/4.4.3/krita-4.4.3.tar.xz
 Source0  : https://download.kde.org/stable/krita/4.4.3/krita-4.4.3.tar.xz
 Source1  : https://download.kde.org/stable/krita/4.4.3/krita-4.4.3.tar.xz.sig
