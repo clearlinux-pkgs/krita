@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xB69EB4CF7468332F (dimula73@gmail.com)
 #
 Name     : krita
-Version  : 4.4.5
-Release  : 46
-URL      : https://download.kde.org/stable/krita/4.4.5/krita-4.4.5.tar.xz
-Source0  : https://download.kde.org/stable/krita/4.4.5/krita-4.4.5.tar.xz
-Source1  : https://download.kde.org/stable/krita/4.4.5/krita-4.4.5.tar.xz.sig
+Version  : 4.4.7
+Release  : 47
+URL      : https://download.kde.org/stable/krita/4.4.7/krita-4.4.7.tar.gz
+Source0  : https://download.kde.org/stable/krita/4.4.7/krita-4.4.7.tar.gz
+Source1  : https://download.kde.org/stable/krita/4.4.7/krita-4.4.7.tar.gz.sig
 Summary  : Open source painting program
 Group    : Development/Tools
 License  : BSD-3-Clause CC-BY-SA-4.0 GPL-2.0 GPL-3.0 LGPL-2.1 Unlicense Zlib
@@ -124,8 +124,8 @@ locales components for the krita package.
 
 
 %prep
-%setup -q -n krita-4.4.5
-cd %{_builddir}/krita-4.4.5
+%setup -q -n krita-4.4.7
+cd %{_builddir}/krita-4.4.7
 %patch1 -p1
 
 %build
@@ -133,36 +133,36 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1623399111
+export SOURCE_DATE_EPOCH=1628541272
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
-export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
-export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
+export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=auto "
+export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %cmake ..
 make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1623399111
+export SOURCE_DATE_EPOCH=1628541272
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
-cp %{_builddir}/krita-4.4.5/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/krita-4.4.5/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
-cp %{_builddir}/krita-4.4.5/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/4577cbeb3556a519433c8f3b7476c74b55f7ef7a
-cp %{_builddir}/krita-4.4.5/krita/data/aboutdata/LICENSE %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/krita-4.4.5/krita/data/patterns/dith_license.txt %{buildroot}/usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
-cp %{_builddir}/krita-4.4.5/krita/integration/3rdparty/LICENSE %{buildroot}/usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
-cp %{_builddir}/krita-4.4.5/packaging/windows/installer/license_gpl-3.0.rtf %{buildroot}/usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
-cp %{_builddir}/krita-4.4.5/plugins/generators/simplexnoise/3rdparty/c-open-simplex/LICENSE %{buildroot}/usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
-cp %{_builddir}/krita-4.4.5/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
-cp %{_builddir}/krita-4.4.5/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
-cp %{_builddir}/krita-4.4.5/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/krita-4.4.7/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/krita-4.4.7/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
+cp %{_builddir}/krita-4.4.7/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/4577cbeb3556a519433c8f3b7476c74b55f7ef7a
+cp %{_builddir}/krita-4.4.7/krita/data/aboutdata/LICENSE %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/krita-4.4.7/krita/data/patterns/dith_license.txt %{buildroot}/usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
+cp %{_builddir}/krita-4.4.7/krita/integration/3rdparty/LICENSE %{buildroot}/usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
+cp %{_builddir}/krita-4.4.7/packaging/windows/installer/license_gpl-3.0.rtf %{buildroot}/usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
+cp %{_builddir}/krita-4.4.7/plugins/generators/simplexnoise/3rdparty/c-open-simplex/LICENSE %{buildroot}/usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
+cp %{_builddir}/krita-4.4.7/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
+cp %{_builddir}/krita-4.4.7/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/krita-4.4.7/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -1269,56 +1269,56 @@ popd
 /usr/lib64/kritaplugins/kritawavefilter.so
 /usr/lib64/kritaplugins/kritawaveletdecompose.so
 /usr/lib64/kritaplugins/kritaxcfimport.so
-/usr/lib64/libkritabasicflakes.so.21
-/usr/lib64/libkritabasicflakes.so.21.0.0
-/usr/lib64/libkritacolor.so.21
-/usr/lib64/libkritacolor.so.21.0.0
-/usr/lib64/libkritacolord.so.21
-/usr/lib64/libkritacolord.so.21.0.0
-/usr/lib64/libkritacommand.so.21
-/usr/lib64/libkritacommand.so.21.0.0
-/usr/lib64/libkritaflake.so.21
-/usr/lib64/libkritaflake.so.21.0.0
-/usr/lib64/libkritaglobal.so.21
-/usr/lib64/libkritaglobal.so.21.0.0
-/usr/lib64/libkritaimage.so.21
-/usr/lib64/libkritaimage.so.21.0.0
-/usr/lib64/libkritaimpex.so.21
-/usr/lib64/libkritaimpex.so.21.0.0
-/usr/lib64/libkritalibbrush.so.21
-/usr/lib64/libkritalibbrush.so.21.0.0
-/usr/lib64/libkritalibkis.so.21
-/usr/lib64/libkritalibkis.so.21.0.0
-/usr/lib64/libkritalibkra.so.21
-/usr/lib64/libkritalibkra.so.21.0.0
-/usr/lib64/libkritalibpaintop.so.21
-/usr/lib64/libkritalibpaintop.so.21.0.0
-/usr/lib64/libkritametadata.so.21
-/usr/lib64/libkritametadata.so.21.0.0
-/usr/lib64/libkritaodf.so.21
-/usr/lib64/libkritaodf.so.21.0.0
-/usr/lib64/libkritapigment.so.21
-/usr/lib64/libkritapigment.so.21.0.0
-/usr/lib64/libkritaplugin.so.21
-/usr/lib64/libkritaplugin.so.21.0.0
-/usr/lib64/libkritapsd.so.21
-/usr/lib64/libkritapsd.so.21.0.0
-/usr/lib64/libkritaqml.so.21
-/usr/lib64/libkritaqml.so.21.0.0
-/usr/lib64/libkritastore.so.21
-/usr/lib64/libkritastore.so.21.0.0
-/usr/lib64/libkritatext.so.21
-/usr/lib64/libkritatext.so.21.0.0
-/usr/lib64/libkritatextlayout.so.21
-/usr/lib64/libkritatextlayout.so.21.0.0
-/usr/lib64/libkritaui.so.21
-/usr/lib64/libkritaui.so.21.0.0
-/usr/lib64/libkritaversion.so.21
-/usr/lib64/libkritaversion.so.21.0.0
-/usr/lib64/libkritawidgets.so.21
-/usr/lib64/libkritawidgets.so.21.0.0
-/usr/lib64/libkritawidgetutils.so.21
-/usr/lib64/libkritawidgetutils.so.21.0.0
+/usr/lib64/libkritabasicflakes.so.20
+/usr/lib64/libkritabasicflakes.so.20.0.0
+/usr/lib64/libkritacolor.so.20
+/usr/lib64/libkritacolor.so.20.0.0
+/usr/lib64/libkritacolord.so.20
+/usr/lib64/libkritacolord.so.20.0.0
+/usr/lib64/libkritacommand.so.20
+/usr/lib64/libkritacommand.so.20.0.0
+/usr/lib64/libkritaflake.so.20
+/usr/lib64/libkritaflake.so.20.0.0
+/usr/lib64/libkritaglobal.so.20
+/usr/lib64/libkritaglobal.so.20.0.0
+/usr/lib64/libkritaimage.so.20
+/usr/lib64/libkritaimage.so.20.0.0
+/usr/lib64/libkritaimpex.so.20
+/usr/lib64/libkritaimpex.so.20.0.0
+/usr/lib64/libkritalibbrush.so.20
+/usr/lib64/libkritalibbrush.so.20.0.0
+/usr/lib64/libkritalibkis.so.20
+/usr/lib64/libkritalibkis.so.20.0.0
+/usr/lib64/libkritalibkra.so.20
+/usr/lib64/libkritalibkra.so.20.0.0
+/usr/lib64/libkritalibpaintop.so.20
+/usr/lib64/libkritalibpaintop.so.20.0.0
+/usr/lib64/libkritametadata.so.20
+/usr/lib64/libkritametadata.so.20.0.0
+/usr/lib64/libkritaodf.so.20
+/usr/lib64/libkritaodf.so.20.0.0
+/usr/lib64/libkritapigment.so.20
+/usr/lib64/libkritapigment.so.20.0.0
+/usr/lib64/libkritaplugin.so.20
+/usr/lib64/libkritaplugin.so.20.0.0
+/usr/lib64/libkritapsd.so.20
+/usr/lib64/libkritapsd.so.20.0.0
+/usr/lib64/libkritaqml.so.20
+/usr/lib64/libkritaqml.so.20.0.0
+/usr/lib64/libkritastore.so.20
+/usr/lib64/libkritastore.so.20.0.0
+/usr/lib64/libkritatext.so.20
+/usr/lib64/libkritatext.so.20.0.0
+/usr/lib64/libkritatextlayout.so.20
+/usr/lib64/libkritatextlayout.so.20.0.0
+/usr/lib64/libkritaui.so.20
+/usr/lib64/libkritaui.so.20.0.0
+/usr/lib64/libkritaversion.so.20
+/usr/lib64/libkritaversion.so.20.0.0
+/usr/lib64/libkritawidgets.so.20
+/usr/lib64/libkritawidgets.so.20.0.0
+/usr/lib64/libkritawidgetutils.so.20
+/usr/lib64/libkritawidgetutils.so.20.0.0
 /usr/lib64/qt5/qml/org/krita/draganddrop/libdraganddropplugin.so
 /usr/lib64/qt5/qml/org/krita/draganddrop/qmldir
 /usr/lib64/qt5/qml/org/krita/sketch/components/BusyIndicator.qml

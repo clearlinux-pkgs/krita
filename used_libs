@@ -10,7 +10,7 @@ libKF5ItemViews.so.5
 libKF5WidgetsAddons.so.5
 libKF5WindowSystem.so.5
 libOpenColorIO.so.1
-libOpenEXR-3_0.so.28
+libOpenEXR-3_0.so.29
 libQt5Concurrent.so.5
 libQt5Core.so.5
 libQt5DBus.so.5
@@ -38,7 +38,6 @@ libm.so.6
 libopenjp2.so.7
 libpng16.so.16
 libpoppler-qt5.so.1
-libpthread.so.0
 libpython3.9.so.1.0
 libquazip1-qt5.so.1.0.0
 libraw.so.20
