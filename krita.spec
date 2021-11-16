@@ -6,7 +6,7 @@
 #
 Name     : krita
 Version  : 4.4.8
-Release  : 48
+Release  : 49
 URL      : https://download.kde.org/stable/krita/4.4.8/krita-4.4.8.tar.gz
 Source0  : https://download.kde.org/stable/krita/4.4.8/krita-4.4.8.tar.gz
 Source1  : https://download.kde.org/stable/krita/4.4.8/krita-4.4.8.tar.gz.sig
