@@ -5,19 +5,20 @@
 # Source0 file verified with key 0x4DA79EDA231C852B (foundation@krita.org)
 #
 Name     : krita
-Version  : 4.4.8
-Release  : 49
-URL      : https://download.kde.org/stable/krita/4.4.8/krita-4.4.8.tar.gz
-Source0  : https://download.kde.org/stable/krita/4.4.8/krita-4.4.8.tar.gz
-Source1  : https://download.kde.org/stable/krita/4.4.8/krita-4.4.8.tar.gz.sig
+Version  : 5.0.2
+Release  : 50
+URL      : https://download.kde.org/stable/krita/5.0.2/krita-5.0.2.tar.gz
+Source0  : https://download.kde.org/stable/krita/5.0.2/krita-5.0.2.tar.gz
+Source1  : https://download.kde.org/stable/krita/5.0.2/krita-5.0.2.tar.gz.sig
 Summary  : Open source painting program
 Group    : Development/Tools
-License  : BSD-3-Clause CC-BY-SA-4.0 GPL-2.0 GPL-3.0 LGPL-2.1 Unlicense Zlib
+License  : Apache-2.0 BSD-2-Clause BSD-3-Clause BSL-1.0 CC-BY-SA-4.0 CC0-1.0 GPL-2.0 GPL-3.0 ISC LGPL-2.0 LGPL-2.1 LGPL-3.0 MIT Unlicense Zlib
 Requires: krita-bin = %{version}-%{release}
 Requires: krita-data = %{version}-%{release}
 Requires: krita-lib = %{version}-%{release}
 Requires: krita-license = %{version}-%{release}
 Requires: krita-locales = %{version}-%{release}
+BuildRequires : OpenColorIO-data
 BuildRequires : PyQt5
 BuildRequires : Vc-dev
 BuildRequires : Vc-staticdev
@@ -34,6 +35,7 @@ BuildRequires : extra-cmake-modules pkgconfig(OpenEXR)
 BuildRequires : extra-cmake-modules pkgconfig(poppler)
 BuildRequires : extra-cmake-modules-data
 BuildRequires : git
+BuildRequires : glibc-dev
 BuildRequires : gsl-dev
 BuildRequires : kcrash-dev
 BuildRequires : ki18n-dev
@@ -46,9 +48,11 @@ BuildRequires : pkgconfig(OpenColorIO)
 BuildRequires : pkgconfig(exiv2)
 BuildRequires : pkgconfig(fftw3)
 BuildRequires : pkgconfig(lcms2)
+BuildRequires : pkgconfig(libmypaint)
 BuildRequires : pkgconfig(libopenjp2)
 BuildRequires : pkgconfig(libraw)
 BuildRequires : pkgconfig(libraw_r)
+BuildRequires : pkgconfig(libwebp)
 BuildRequires : poppler-dev
 BuildRequires : python3
 BuildRequires : python3-dev
@@ -58,9 +62,9 @@ BuildRequires : qtdeclarative-dev
 BuildRequires : qtmultimedia-dev
 BuildRequires : quazip-dev
 BuildRequires : sip-dev
+BuildRequires : subversion
 BuildRequires : tiff-dev
 BuildRequires : zlib-dev
-Patch1: 0001-Support-building-with-OpenEXR-3.patch
 
 %description
 Krita is a professional FREE and open source painting program. It is made by
@@ -124,16 +128,15 @@ locales components for the krita package.
 
 
 %prep
-%setup -q -n krita-4.4.8
-cd %{_builddir}/krita-4.4.8
-%patch1 -p1
+%setup -q -n krita-5.0.2
+cd %{_builddir}/krita-5.0.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1631081355
+export SOURCE_DATE_EPOCH=1642625268
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -149,20 +152,40 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1631081355
+export SOURCE_DATE_EPOCH=1642625268
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
-cp %{_builddir}/krita-4.4.8/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/krita-4.4.8/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
-cp %{_builddir}/krita-4.4.8/cmake/modules/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/4577cbeb3556a519433c8f3b7476c74b55f7ef7a
-cp %{_builddir}/krita-4.4.8/krita/data/aboutdata/LICENSE %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/krita-4.4.8/krita/data/patterns/dith_license.txt %{buildroot}/usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
-cp %{_builddir}/krita-4.4.8/krita/integration/3rdparty/LICENSE %{buildroot}/usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
-cp %{_builddir}/krita-4.4.8/packaging/windows/installer/license_gpl-3.0.rtf %{buildroot}/usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
-cp %{_builddir}/krita-4.4.8/plugins/generators/simplexnoise/3rdparty/c-open-simplex/LICENSE %{buildroot}/usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
-cp %{_builddir}/krita-4.4.8/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
-cp %{_builddir}/krita-4.4.8/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
-cp %{_builddir}/krita-4.4.8/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/krita-5.0.2/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/krita-5.0.2/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
+cp %{_builddir}/krita-5.0.2/LICENSES/Apache-2.0.txt %{buildroot}/usr/share/package-licenses/krita/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/krita-5.0.2/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/krita/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
+cp %{_builddir}/krita-5.0.2/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/krita/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
+cp %{_builddir}/krita-5.0.2/LICENSES/BSL-1.0.txt %{buildroot}/usr/share/package-licenses/krita/557dcd723cf0fc1354fb34bd5528fdbe685a2e86
+cp %{_builddir}/krita-5.0.2/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/krita/8287b608d3fa40ef401339fd907ca1260c964123
+cp %{_builddir}/krita-5.0.2/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/krita/2a638514c87c4923c0570c55822620fad56f2a33
+cp %{_builddir}/krita-5.0.2/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/krita-5.0.2/LICENSES/GPL-3.0-only.txt %{buildroot}/usr/share/package-licenses/krita/6091db0aead0d90182b93d3c0d09ba93d188f907
+cp %{_builddir}/krita-5.0.2/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/6091db0aead0d90182b93d3c0d09ba93d188f907
+cp %{_builddir}/krita-5.0.2/LICENSES/ICS.txt %{buildroot}/usr/share/package-licenses/krita/221e6be04f1b020e012e7bd9e9e39b86fda17ba2
+cp %{_builddir}/krita-5.0.2/LICENSES/LGPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/krita/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/krita-5.0.2/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/krita-5.0.2/LICENSES/LGPL-2.1-only.txt %{buildroot}/usr/share/package-licenses/krita/3c3d7573e137d48253731c975ecf90d74cfa9efe
+cp %{_builddir}/krita-5.0.2/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/krita/6f1f675aa5f6a2bbaa573b8343044b166be28399
+cp %{_builddir}/krita-5.0.2/LICENSES/LGPL-3.0-only.txt %{buildroot}/usr/share/package-licenses/krita/757b86330df80f81143d5916b3e92b4bcb1b1890
+cp %{_builddir}/krita-5.0.2/LICENSES/LGPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/757b86330df80f81143d5916b3e92b4bcb1b1890
+cp %{_builddir}/krita-5.0.2/LICENSES/LicenseRef-KDE-Accepted-GPL.txt %{buildroot}/usr/share/package-licenses/krita/7d9831e05094ce723947d729c2a46a09d6e90275
+cp %{_builddir}/krita-5.0.2/LICENSES/LicenseRef-KDE-Accepted-GPL.txt %{buildroot}/usr/share/package-licenses/krita/7d9831e05094ce723947d729c2a46a09d6e90275
+cp %{_builddir}/krita-5.0.2/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/krita/e458941548e0864907e654fa2e192844ae90fc32
+cp %{_builddir}/krita-5.0.2/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/krita/e458941548e0864907e654fa2e192844ae90fc32
+cp %{_builddir}/krita-5.0.2/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/krita/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3
+cp %{_builddir}/krita-5.0.2/krita/data/aboutdata/LICENSE %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/krita-5.0.2/krita/data/patterns/dith_license.txt %{buildroot}/usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
+cp %{_builddir}/krita-5.0.2/krita/integration/3rdparty/LICENSE %{buildroot}/usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
+cp %{_builddir}/krita-5.0.2/packaging/windows/installer/license_gpl-3.0.rtf %{buildroot}/usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
+cp %{_builddir}/krita-5.0.2/plugins/generators/simplexnoise/3rdparty/c-open-simplex/LICENSE %{buildroot}/usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
+cp %{_builddir}/krita-5.0.2/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
+cp %{_builddir}/krita-5.0.2/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/krita-5.0.2/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -191,6 +214,7 @@ popd
 
 %files bin
 %defattr(-,root,root,-)
+/usr/bin/AppImageUpdateDummy
 /usr/bin/krita
 /usr/bin/krita_version
 /usr/bin/kritarunner
@@ -204,6 +228,7 @@ popd
 /usr/share/applications/krita_jp2.desktop
 /usr/share/applications/krita_jpeg.desktop
 /usr/share/applications/krita_kra.desktop
+/usr/share/applications/krita_krz.desktop
 /usr/share/applications/krita_ora.desktop
 /usr/share/applications/krita_pdf.desktop
 /usr/share/applications/krita_png.desktop
@@ -214,6 +239,7 @@ popd
 /usr/share/applications/krita_svg.desktop
 /usr/share/applications/krita_tga.desktop
 /usr/share/applications/krita_tiff.desktop
+/usr/share/applications/krita_webp.desktop
 /usr/share/applications/krita_xcf.desktop
 /usr/share/applications/org.kde.krita.desktop
 /usr/share/color-schemes/KritaBlender.colors
@@ -288,47 +314,29 @@ popd
 /usr/share/krita/actions/MoveTool.action
 /usr/share/krita/actions/PathTool.action
 /usr/share/krita/actions/SvgTextTool.action
+/usr/share/krita/actions/dbexplorer.action
 /usr/share/krita/actions/krita.action
 /usr/share/krita/actions/kritamenu.action
 /usr/share/krita/actions/plugin_importer.action
+/usr/share/krita/actions/recorder.action
 /usr/share/krita/actions/tenbrushes.action
 /usr/share/krita/actions/tenscripts.action
 /usr/share/krita/actions/threshold.action
+/usr/share/krita/actions/tools.action
 /usr/share/krita/brushes/triangle.svg
 /usr/share/krita/bundles/Krita_3_Default_Resources.bundle
 /usr/share/krita/bundles/Krita_4_Default_Resources.bundle
 /usr/share/krita/bundles/Krita_Artists_SeExpr_examples.bundle
 /usr/share/krita/bundles/README
 /usr/share/krita/bundles/RGBA_brushes.bundle
-/usr/share/krita/defaultpresets/colorsmudge.kpp
-/usr/share/krita/defaultpresets/complex.kpp
-/usr/share/krita/defaultpresets/curvebrush.kpp
-/usr/share/krita/defaultpresets/deformbrush.kpp
-/usr/share/krita/defaultpresets/duplicate.kpp
-/usr/share/krita/defaultpresets/dynabrush.kpp
-/usr/share/krita/defaultpresets/eraser.kpp
-/usr/share/krita/defaultpresets/experimentbrush.kpp
-/usr/share/krita/defaultpresets/filter.kpp
-/usr/share/krita/defaultpresets/gridbrush.kpp
-/usr/share/krita/defaultpresets/hairybrush.kpp
-/usr/share/krita/defaultpresets/hatchingbrush.kpp
-/usr/share/krita/defaultpresets/paintbrush.kpp
-/usr/share/krita/defaultpresets/particlebrush.kpp
-/usr/share/krita/defaultpresets/roundmarker.kpp
-/usr/share/krita/defaultpresets/sketchbrush.kpp
-/usr/share/krita/defaultpresets/smudge.kpp
-/usr/share/krita/defaultpresets/spraybrush.kpp
-/usr/share/krita/defaultpresets/tangentnormal.kpp
 /usr/share/krita/donation/banner.png
 /usr/share/krita/dtd/krita.dtd
 /usr/share/krita/gamutmasks/Atmosphere_With_Accent.kgm
 /usr/share/krita/gamutmasks/Atmospheric_Triad.kgm
 /usr/share/krita/gamutmasks/Complementary.kgm
 /usr/share/krita/gamutmasks/Dominant_Hue_With_Accent.kgm
-/usr/share/krita/gamutmasks/GamutMaskTemplate.kra
 /usr/share/krita/gamutmasks/Shifted_Triad.kgm
 /usr/share/krita/gamutmasks/Split_Complementary.kgm
-/usr/share/krita/gamutmasks/empty_mask_preview.png
 /usr/share/krita/gradients/BG-Krita2.ggr
 /usr/share/krita/gradients/GPS-FG-Glare.ggr
 /usr/share/krita/gradients/GPS-Fire-Blueish.ggr
@@ -355,6 +363,7 @@ popd
 /usr/share/krita/images/krita-filterop.png
 /usr/share/krita/images/krita-grid.png
 /usr/share/krita/images/krita-hatching.png
+/usr/share/krita/images/krita-mypaint.png
 /usr/share/krita/images/krita-paintbrush.png
 /usr/share/krita/images/krita-particle.png
 /usr/share/krita/images/krita-sketch.png
@@ -374,8 +383,31 @@ popd
 /usr/share/krita/metadata/schemas/xmp.schema
 /usr/share/krita/metadata/schemas/xmpmm.schema
 /usr/share/krita/metadata/schemas/xmprights.schema
+/usr/share/krita/paintoppresets/Digital.tag
+/usr/share/krita/paintoppresets/Erasers.tag
+/usr/share/krita/paintoppresets/FX.tag
+/usr/share/krita/paintoppresets/Favorites.tag
+/usr/share/krita/paintoppresets/Ink.tag
+/usr/share/krita/paintoppresets/Paint.tag
+/usr/share/krita/paintoppresets/Pixel_Art.tag
+/usr/share/krita/paintoppresets/Sketch.tag
+/usr/share/krita/paintoppresets/Textures.tag
 /usr/share/krita/paintoppresets/a)_Eraser_Circle.kpp
 /usr/share/krita/paintoppresets/b)_Basic-5_Size_default.kpp
+/usr/share/krita/paintoppresets/c)_Pencil_1_Sketch_(mypaint).myb
+/usr/share/krita/paintoppresets/c)_Pencil_1_Sketch_(mypaint)_prev.png
+/usr/share/krita/paintoppresets/c)_Pencil_2b_(mypaint).myb
+/usr/share/krita/paintoppresets/c)_Pencil_2b_(mypaint)_prev.png
+/usr/share/krita/paintoppresets/d)_Ink_pen_(mypaint).myb
+/usr/share/krita/paintoppresets/d)_Ink_pen_(mypaint)_prev.png
+/usr/share/krita/paintoppresets/e)_Marker_Medium_(mypaint).myb
+/usr/share/krita/paintoppresets/e)_Marker_Medium_(mypaint)_prev.png
+/usr/share/krita/paintoppresets/e)_Marker_Plain_(mypaint).myb
+/usr/share/krita/paintoppresets/e)_Marker_Plain_(mypaint)_prev.png
+/usr/share/krita/paintoppresets/i)_Wet_Knife_Plus_(mypaint).myb
+/usr/share/krita/paintoppresets/i)_Wet_Knife_Plus_(mypaint)_prev.png
+/usr/share/krita/paintoppresets/i)_Wet_Paint_Plus_(mypaint).myb
+/usr/share/krita/paintoppresets/i)_Wet_Paint_Plus_(mypaint)_prev.png
 /usr/share/krita/paintoppresets/j)_WaterC_Basic_Lines-Dry.kpp
 /usr/share/krita/paintoppresets/j)_WaterC_Basic_Lines-Wet-Pattern.kpp
 /usr/share/krita/paintoppresets/j)_WaterC_Basic_Lines-Wet.kpp
@@ -390,6 +422,7 @@ popd
 /usr/share/krita/paintoppresets/j)_WaterC_Spread.kpp
 /usr/share/krita/paintoppresets/j)_WaterC_Spread_WideArea.kpp
 /usr/share/krita/paintoppresets/j)_WaterC_Water-Pattern.kpp
+/usr/share/krita/palettes/animation-color-set.gpl
 /usr/share/krita/palettes/concept-cookie.gpl
 /usr/share/krita/palettes/default.gpl
 /usr/share/krita/palettes/gradient.gpl
@@ -514,14 +547,6 @@ popd
 /usr/share/krita/patterns/generic_paper1.pat
 /usr/share/krita/patterns/generic_paper2.pat
 /usr/share/krita/patterns/hexacolBW__2.pat
-/usr/share/krita/pics/dark_arrow_east.png
-/usr/share/krita/pics/dark_arrow_north.png
-/usr/share/krita/pics/dark_arrow_north_east.png
-/usr/share/krita/pics/dark_arrow_north_west.png
-/usr/share/krita/pics/dark_arrow_south.png
-/usr/share/krita/pics/dark_arrow_south_east.png
-/usr/share/krita/pics/dark_arrow_south_west.png
-/usr/share/krita/pics/dark_arrow_west.png
 /usr/share/krita/pics/dark_krita_tool_assistant.png
 /usr/share/krita/pics/dark_template_DIN_A3_landscape.png
 /usr/share/krita/pics/dark_template_DIN_A4_portrait.png
@@ -533,19 +558,10 @@ popd
 /usr/share/krita/pics/dark_template_ratio_43.png
 /usr/share/krita/pics/dark_template_texture.png
 /usr/share/krita/pics/dark_template_web_design.png
-/usr/share/krita/pics/extended_color_selector.png
 /usr/share/krita/pics/kis_colselng_color_patches.png
 /usr/share/krita/pics/kis_colselng_color_triangle.png
 /usr/share/krita/pics/kis_colselng_my_paint_shade_selector.png
 /usr/share/krita/pics/krita_tool_assistant.png
-/usr/share/krita/pics/light_arrow_east.png
-/usr/share/krita/pics/light_arrow_north.png
-/usr/share/krita/pics/light_arrow_north_east.png
-/usr/share/krita/pics/light_arrow_north_west.png
-/usr/share/krita/pics/light_arrow_south.png
-/usr/share/krita/pics/light_arrow_south_east.png
-/usr/share/krita/pics/light_arrow_south_west.png
-/usr/share/krita/pics/light_arrow_west.png
 /usr/share/krita/pics/light_krita_tool_assistant.png
 /usr/share/krita/pics/light_template_DIN_A3_landscape.png
 /usr/share/krita/pics/light_template_DIN_A4_portrait.png
@@ -565,6 +581,10 @@ popd
 /usr/share/krita/predefined_image_sizes/A5__600_ppi_.predefinedimage
 /usr/share/krita/predefined_image_sizes/A6__300_ppi_.predefinedimage
 /usr/share/krita/predefined_image_sizes/A6__600_ppi_.predefinedimage
+/usr/share/krita/predefined_image_sizes/Film_16_9_4K.predefinedimage
+/usr/share/krita/predefined_image_sizes/Film_4_3_4K.predefinedimage
+/usr/share/krita/predefined_image_sizes/Film_64_27_4K_Wide.predefinedimage
+/usr/share/krita/predefined_image_sizes/Pixel_240x256.predefinedimage
 /usr/share/krita/predefined_image_sizes/Texture_1024x1024.predefinedimage
 /usr/share/krita/predefined_image_sizes/Texture_2048x2048.predefinedimage
 /usr/share/krita/predefined_image_sizes/Texture_256x256.predefinedimage
@@ -784,6 +804,7 @@ popd
 /usr/share/krita/pykrita/kritapykrita_krita_script_starter.desktop
 /usr/share/krita/pykrita/kritapykrita_lastdocumentsdocker.desktop
 /usr/share/krita/pykrita/kritapykrita_mixer_slider_docker.desktop
+/usr/share/krita/pykrita/kritapykrita_photobash_images.desktop
 /usr/share/krita/pykrita/kritapykrita_plugin_importer.desktop
 /usr/share/krita/pykrita/kritapykrita_quick_settings_docker.desktop
 /usr/share/krita/pykrita/kritapykrita_scripter.desktop
@@ -800,8 +821,12 @@ popd
 /usr/share/krita/pykrita/mixer_slider_docker/settings_dialog.py
 /usr/share/krita/pykrita/mixer_slider_docker/slider_line.py
 /usr/share/krita/pykrita/mixer_slider_docker/ui_mixer_slider_docker.py
+/usr/share/krita/pykrita/photobash_images/Manual.html
+/usr/share/krita/pykrita/photobash_images/__init__.py
+/usr/share/krita/pykrita/photobash_images/photobash.py
 /usr/share/krita/pykrita/plugin_importer/__init__.py
 /usr/share/krita/pykrita/plugin_importer/manual.html
+/usr/share/krita/pykrita/plugin_importer/plugin_downloader.py
 /usr/share/krita/pykrita/plugin_importer/plugin_importer.py
 /usr/share/krita/pykrita/plugin_importer/plugin_importer_extension.py
 /usr/share/krita/pykrita/quick_settings_docker/Manual.html
@@ -894,22 +919,29 @@ popd
 /usr/share/krita/qmlthemes/default/icons/add.svg
 /usr/share/krita/qmlthemes/default/icons/apply-black.svg
 /usr/share/krita/qmlthemes/default/icons/apply.svg
+/usr/share/krita/qmlthemes/default/icons/back-black.svg
 /usr/share/krita/qmlthemes/default/icons/back.svg
 /usr/share/krita/qmlthemes/default/icons/camera-black.svg
 /usr/share/krita/qmlthemes/default/icons/cancel-black.svg
 /usr/share/krita/qmlthemes/default/icons/checkbox-checked.svg
 /usr/share/krita/qmlthemes/default/icons/checkbox-unchecked.svg
 /usr/share/krita/qmlthemes/default/icons/checker-small.svg
+/usr/share/krita/qmlthemes/default/icons/close-black.svg
 /usr/share/krita/qmlthemes/default/icons/close.svg
+/usr/share/krita/qmlthemes/default/icons/color_wheel-black.svg
 /usr/share/krita/qmlthemes/default/icons/color_wheel.svg
-/usr/share/krita/qmlthemes/default/icons/colorpicker.svg
+/usr/share/krita/qmlthemes/default/icons/colorsampler-black.svg
+/usr/share/krita/qmlthemes/default/icons/colorsampler.svg
 /usr/share/krita/qmlthemes/default/icons/combo-arrows-white.svg
 /usr/share/krita/qmlthemes/default/icons/crop-black.svg
 /usr/share/krita/qmlthemes/default/icons/crop.svg
 /usr/share/krita/qmlthemes/default/icons/delete-black.svg
 /usr/share/krita/qmlthemes/default/icons/delete.svg
+/usr/share/krita/qmlthemes/default/icons/down-black.svg
 /usr/share/krita/qmlthemes/default/icons/down.svg
+/usr/share/krita/qmlthemes/default/icons/edit-black.svg
 /usr/share/krita/qmlthemes/default/icons/edit.svg
+/usr/share/krita/qmlthemes/default/icons/erase-black.svg
 /usr/share/krita/qmlthemes/default/icons/erase.svg
 /usr/share/krita/qmlthemes/default/icons/expansionmarker.svg
 /usr/share/krita/qmlthemes/default/icons/fileclip-black.svg
@@ -918,17 +950,22 @@ popd
 /usr/share/krita/qmlthemes/default/icons/filenew.svg
 /usr/share/krita/qmlthemes/default/icons/fileopen-black.svg
 /usr/share/krita/qmlthemes/default/icons/fileopen.svg
+/usr/share/krita/qmlthemes/default/icons/filesave-black.svg
 /usr/share/krita/qmlthemes/default/icons/filesave.svg
+/usr/share/krita/qmlthemes/default/icons/filesaveas-black.svg
 /usr/share/krita/qmlthemes/default/icons/filesaveas.svg
+/usr/share/krita/qmlthemes/default/icons/fileshare-black.svg
 /usr/share/krita/qmlthemes/default/icons/fileshare.svg
 /usr/share/krita/qmlthemes/default/icons/fill-black.svg
 /usr/share/krita/qmlthemes/default/icons/fill.svg
 /usr/share/krita/qmlthemes/default/icons/filter_delete-black.svg
 /usr/share/krita/qmlthemes/default/icons/filter_load-black.svg
 /usr/share/krita/qmlthemes/default/icons/filter_save-black.svg
+/usr/share/krita/qmlthemes/default/icons/forward-black.svg
 /usr/share/krita/qmlthemes/default/icons/forward.svg
 /usr/share/krita/qmlthemes/default/icons/gradient-black.svg
 /usr/share/krita/qmlthemes/default/icons/gradient.svg
+/usr/share/krita/qmlthemes/default/icons/help-black.svg
 /usr/share/krita/qmlthemes/default/icons/help.svg
 /usr/share/krita/qmlthemes/default/icons/krita_sketch.svg
 /usr/share/krita/qmlthemes/default/icons/layer_clear.svg
@@ -944,6 +981,7 @@ popd
 /usr/share/krita/qmlthemes/default/icons/locked_off-small.svg
 /usr/share/krita/qmlthemes/default/icons/locked_on-black.svg
 /usr/share/krita/qmlthemes/default/icons/locked_on-small.svg
+/usr/share/krita/qmlthemes/default/icons/minimize-black.svg
 /usr/share/krita/qmlthemes/default/icons/minimize.svg
 /usr/share/krita/qmlthemes/default/icons/mirror_c-black.svg
 /usr/share/krita/qmlthemes/default/icons/mirror_h-black.svg
@@ -956,25 +994,36 @@ popd
 /usr/share/krita/qmlthemes/default/icons/palette-black.svg
 /usr/share/krita/qmlthemes/default/icons/palette-delete-black.svg
 /usr/share/krita/qmlthemes/default/icons/palette.svg
+/usr/share/krita/qmlthemes/default/icons/redo-black.svg
 /usr/share/krita/qmlthemes/default/icons/redo.svg
 /usr/share/krita/qmlthemes/default/icons/select-add.svg
 /usr/share/krita/qmlthemes/default/icons/select-apply.svg
 /usr/share/krita/qmlthemes/default/icons/select-area.svg
 /usr/share/krita/qmlthemes/default/icons/select-color.svg
+/usr/share/krita/qmlthemes/default/icons/select-deselect-black.svg
 /usr/share/krita/qmlthemes/default/icons/select-deselect.svg
+/usr/share/krita/qmlthemes/default/icons/select-hide-black.svg
 /usr/share/krita/qmlthemes/default/icons/select-hide.svg
 /usr/share/krita/qmlthemes/default/icons/select-intersect.svg
 /usr/share/krita/qmlthemes/default/icons/select-polygon.svg
 /usr/share/krita/qmlthemes/default/icons/select-rectangle.svg
 /usr/share/krita/qmlthemes/default/icons/select-replace.svg
+/usr/share/krita/qmlthemes/default/icons/select-reselect-black.svg
 /usr/share/krita/qmlthemes/default/icons/select-reselect.svg
+/usr/share/krita/qmlthemes/default/icons/select-show-black.svg
 /usr/share/krita/qmlthemes/default/icons/select-show.svg
 /usr/share/krita/qmlthemes/default/icons/select-sub.svg
+/usr/share/krita/qmlthemes/default/icons/settings-black.svg
 /usr/share/krita/qmlthemes/default/icons/settings.svg
+/usr/share/krita/qmlthemes/default/icons/square-black.svg
+/usr/share/krita/qmlthemes/default/icons/square.svg
+/usr/share/krita/qmlthemes/default/icons/switch-black.svg
 /usr/share/krita/qmlthemes/default/icons/switch.svg
 /usr/share/krita/qmlthemes/default/icons/transform-black.svg
 /usr/share/krita/qmlthemes/default/icons/transform.svg
+/usr/share/krita/qmlthemes/default/icons/undo-black.svg
 /usr/share/krita/qmlthemes/default/icons/undo.svg
+/usr/share/krita/qmlthemes/default/icons/up-black.svg
 /usr/share/krita/qmlthemes/default/icons/up.svg
 /usr/share/krita/qmlthemes/default/icons/visible_off-black.svg
 /usr/share/krita/qmlthemes/default/icons/visible_off-small.svg
@@ -982,6 +1031,7 @@ popd
 /usr/share/krita/qmlthemes/default/icons/visible_on-black.svg
 /usr/share/krita/qmlthemes/default/icons/visible_on-small.svg
 /usr/share/krita/qmlthemes/default/icons/visible_on.svg
+/usr/share/krita/qmlthemes/default/icons/web-black.svg
 /usr/share/krita/qmlthemes/default/icons/web.svg
 /usr/share/krita/qmlthemes/default/images/busyindicator.png
 /usr/share/krita/qmlthemes/default/images/divider.png
@@ -1073,18 +1123,17 @@ popd
 /usr/share/krita/workspaces/Default.kws
 /usr/share/krita/workspaces/Minimal.kws
 /usr/share/krita/workspaces/Small_Vector.kws
+/usr/share/krita/workspaces/Storyboarding.kws
 /usr/share/krita/workspaces/VFX_Paint.kws
 /usr/share/kritaplugins/buginfo.xmlgui
 /usr/share/kritaplugins/clonesarray.xmlgui
 /usr/share/kritaplugins/colorrange.xmlgui
 /usr/share/kritaplugins/colorspaceconversion.xmlgui
+/usr/share/kritaplugins/dbexplorer.xmlgui
 /usr/share/kritaplugins/imageseparate.xmlgui
-/usr/share/kritaplugins/imagesize.xmlgui
 /usr/share/kritaplugins/imagesplit.xmlgui
 /usr/share/kritaplugins/layersplit.xmlgui
 /usr/share/kritaplugins/metadataeditor.xmlgui
-/usr/share/kritaplugins/metadataeditor/dublincore.xmlgui
-/usr/share/kritaplugins/metadataeditor/exif.xmlgui
 /usr/share/kritaplugins/modify_selection.xmlgui
 /usr/share/kritaplugins/offsetimage.xmlgui
 /usr/share/kritaplugins/resourcemanager.xmlgui
@@ -1092,10 +1141,12 @@ popd
 /usr/share/kritaplugins/shearimage.xmlgui
 /usr/share/kritaplugins/waveletdecompose.xmlgui
 /usr/share/metainfo/org.kde.krita.appdata.xml
-/usr/share/xdg/kritarc
 
 %files dev
 %defattr(-,root,root,-)
+/usr/include/kis_qmic_interface.h
+/usr/include/kis_qmic_plugin_interface.h
+/usr/include/kritaqmicinterface_export.h
 /usr/lib64/libkritabasicflakes.so
 /usr/lib64/libkritacolor.so
 /usr/lib64/libkritacolord.so
@@ -1109,14 +1160,14 @@ popd
 /usr/lib64/libkritalibkra.so
 /usr/lib64/libkritalibpaintop.so
 /usr/lib64/libkritametadata.so
-/usr/lib64/libkritaodf.so
 /usr/lib64/libkritapigment.so
 /usr/lib64/libkritaplugin.so
 /usr/lib64/libkritapsd.so
+/usr/lib64/libkritaqmicinterface.so
 /usr/lib64/libkritaqml.so
+/usr/lib64/libkritaresources.so
+/usr/lib64/libkritaresourcewidgets.so
 /usr/lib64/libkritastore.so
-/usr/lib64/libkritatext.so
-/usr/lib64/libkritatextlayout.so
 /usr/lib64/libkritaui.so
 /usr/lib64/libkritaversion.so
 /usr/lib64/libkritawidgets.so
@@ -1129,10 +1180,8 @@ popd
 /usr/lib64/kritaplugins/krita_flaketools.so
 /usr/lib64/kritaplugins/krita_karbontools.so
 /usr/lib64/kritaplugins/krita_raw_import.so
-/usr/lib64/kritaplugins/krita_shape_artistictext.so
 /usr/lib64/kritaplugins/krita_shape_image.so
 /usr/lib64/kritaplugins/krita_shape_paths.so
-/usr/lib64/kritaplugins/krita_shape_text.so
 /usr/lib64/kritaplugins/krita_tool_svgtext.so
 /usr/lib64/kritaplugins/kritaanimationdocker.so
 /usr/lib64/kritaplugins/kritaarrangedocker.so
@@ -1157,6 +1206,7 @@ popd
 /usr/lib64/kritaplugins/kritacsvexport.so
 /usr/lib64/kritaplugins/kritacsvimport.so
 /usr/lib64/kritaplugins/kritacurvepaintop.so
+/usr/lib64/kritaplugins/kritadbexplorer.so
 /usr/lib64/kritaplugins/kritadefaultpaintops.so
 /usr/lib64/kritaplugins/kritadefaulttools.so
 /usr/lib64/kritaplugins/kritadeformpaintop.so
@@ -1185,7 +1235,6 @@ popd
 /usr/lib64/kritaplugins/kritahistogramdocker.so
 /usr/lib64/kritaplugins/kritahistorydocker.so
 /usr/lib64/kritaplugins/kritaimageenhancement.so
-/usr/lib64/kritaplugins/kritaimagesize.so
 /usr/lib64/kritaplugins/kritaimagesplit.so
 /usr/lib64/kritaplugins/kritaindexcolors.so
 /usr/lib64/kritaplugins/kritajp2import.so
@@ -1193,6 +1242,7 @@ popd
 /usr/lib64/kritaplugins/kritajpegimport.so
 /usr/lib64/kritaplugins/kritakraexport.so
 /usr/lib64/kritaplugins/kritakraimport.so
+/usr/lib64/kritaplugins/kritakrzexport.so
 /usr/lib64/kritaplugins/kritalayerdocker.so
 /usr/lib64/kritaplugins/kritalayergroupswitcher.so
 /usr/lib64/kritaplugins/kritalayersplit.so
@@ -1203,6 +1253,7 @@ popd
 /usr/lib64/kritaplugins/kritametadataeditor.so
 /usr/lib64/kritaplugins/kritamodifyselection.so
 /usr/lib64/kritaplugins/kritamultigridpatterngenerator.so
+/usr/lib64/kritaplugins/kritamypaintop.so
 /usr/lib64/kritaplugins/kritanoisefilter.so
 /usr/lib64/kritaplugins/kritanormalize.so
 /usr/lib64/kritaplugins/kritaoffsetimage.so
@@ -1232,6 +1283,7 @@ popd
 /usr/lib64/kritaplugins/kritaqmlexport.so
 /usr/lib64/kritaplugins/kritaraindropsfilter.so
 /usr/lib64/kritaplugins/kritarandompickfilter.so
+/usr/lib64/kritaplugins/kritarecorderdocker.so
 /usr/lib64/kritaplugins/kritaresourcemanager.so
 /usr/lib64/kritaplugins/kritarotateimage.so
 /usr/lib64/kritaplugins/kritaroundcornersfilter.so
@@ -1248,6 +1300,7 @@ popd
 /usr/lib64/kritaplugins/kritaspecificcolorselector.so
 /usr/lib64/kritaplugins/kritaspraypaintop.so
 /usr/lib64/kritaplugins/kritaspriterexport.so
+/usr/lib64/kritaplugins/kritastoryboarddocker.so
 /usr/lib64/kritaplugins/kritasvgcollectiondocker.so
 /usr/lib64/kritaplugins/kritasvgimport.so
 /usr/lib64/kritaplugins/kritatangentnormalpaintop.so
@@ -1268,61 +1321,64 @@ popd
 /usr/lib64/kritaplugins/kritaunsharpfilter.so
 /usr/lib64/kritaplugins/kritawavefilter.so
 /usr/lib64/kritaplugins/kritawaveletdecompose.so
+/usr/lib64/kritaplugins/kritawebpexport.so
+/usr/lib64/kritaplugins/kritawebpimport.so
 /usr/lib64/kritaplugins/kritaxcfimport.so
-/usr/lib64/libkritabasicflakes.so.20
-/usr/lib64/libkritabasicflakes.so.20.0.0
-/usr/lib64/libkritacolor.so.20
-/usr/lib64/libkritacolor.so.20.0.0
-/usr/lib64/libkritacolord.so.20
-/usr/lib64/libkritacolord.so.20.0.0
-/usr/lib64/libkritacommand.so.20
-/usr/lib64/libkritacommand.so.20.0.0
-/usr/lib64/libkritaflake.so.20
-/usr/lib64/libkritaflake.so.20.0.0
-/usr/lib64/libkritaglobal.so.20
-/usr/lib64/libkritaglobal.so.20.0.0
-/usr/lib64/libkritaimage.so.20
-/usr/lib64/libkritaimage.so.20.0.0
-/usr/lib64/libkritaimpex.so.20
-/usr/lib64/libkritaimpex.so.20.0.0
-/usr/lib64/libkritalibbrush.so.20
-/usr/lib64/libkritalibbrush.so.20.0.0
-/usr/lib64/libkritalibkis.so.20
-/usr/lib64/libkritalibkis.so.20.0.0
-/usr/lib64/libkritalibkra.so.20
-/usr/lib64/libkritalibkra.so.20.0.0
-/usr/lib64/libkritalibpaintop.so.20
-/usr/lib64/libkritalibpaintop.so.20.0.0
-/usr/lib64/libkritametadata.so.20
-/usr/lib64/libkritametadata.so.20.0.0
-/usr/lib64/libkritaodf.so.20
-/usr/lib64/libkritaodf.so.20.0.0
-/usr/lib64/libkritapigment.so.20
-/usr/lib64/libkritapigment.so.20.0.0
-/usr/lib64/libkritaplugin.so.20
-/usr/lib64/libkritaplugin.so.20.0.0
-/usr/lib64/libkritapsd.so.20
-/usr/lib64/libkritapsd.so.20.0.0
-/usr/lib64/libkritaqml.so.20
-/usr/lib64/libkritaqml.so.20.0.0
-/usr/lib64/libkritastore.so.20
-/usr/lib64/libkritastore.so.20.0.0
-/usr/lib64/libkritatext.so.20
-/usr/lib64/libkritatext.so.20.0.0
-/usr/lib64/libkritatextlayout.so.20
-/usr/lib64/libkritatextlayout.so.20.0.0
-/usr/lib64/libkritaui.so.20
-/usr/lib64/libkritaui.so.20.0.0
-/usr/lib64/libkritaversion.so.20
-/usr/lib64/libkritaversion.so.20.0.0
-/usr/lib64/libkritawidgets.so.20
-/usr/lib64/libkritawidgets.so.20.0.0
-/usr/lib64/libkritawidgetutils.so.20
-/usr/lib64/libkritawidgetutils.so.20.0.0
+/usr/lib64/libkritabasicflakes.so.17
+/usr/lib64/libkritabasicflakes.so.17.0.0
+/usr/lib64/libkritacolor.so.17
+/usr/lib64/libkritacolor.so.17.0.0
+/usr/lib64/libkritacolord.so.17
+/usr/lib64/libkritacolord.so.17.0.0
+/usr/lib64/libkritacommand.so.17
+/usr/lib64/libkritacommand.so.17.0.0
+/usr/lib64/libkritaflake.so.17
+/usr/lib64/libkritaflake.so.17.0.0
+/usr/lib64/libkritaglobal.so.17
+/usr/lib64/libkritaglobal.so.17.0.0
+/usr/lib64/libkritaimage.so.17
+/usr/lib64/libkritaimage.so.17.0.0
+/usr/lib64/libkritaimpex.so.17
+/usr/lib64/libkritaimpex.so.17.0.0
+/usr/lib64/libkritalibbrush.so.17
+/usr/lib64/libkritalibbrush.so.17.0.0
+/usr/lib64/libkritalibkis.so.17
+/usr/lib64/libkritalibkis.so.17.0.0
+/usr/lib64/libkritalibkra.so.17
+/usr/lib64/libkritalibkra.so.17.0.0
+/usr/lib64/libkritalibpaintop.so.17
+/usr/lib64/libkritalibpaintop.so.17.0.0
+/usr/lib64/libkritametadata.so.17
+/usr/lib64/libkritametadata.so.17.0.0
+/usr/lib64/libkritapigment.so.17
+/usr/lib64/libkritapigment.so.17.0.0
+/usr/lib64/libkritaplugin.so.17
+/usr/lib64/libkritaplugin.so.17.0.0
+/usr/lib64/libkritapsd.so.17
+/usr/lib64/libkritapsd.so.17.0.0
+/usr/lib64/libkritaqmicinterface.so.17
+/usr/lib64/libkritaqmicinterface.so.17.0.0
+/usr/lib64/libkritaqml.so.17
+/usr/lib64/libkritaqml.so.17.0.0
+/usr/lib64/libkritaresources.so.17
+/usr/lib64/libkritaresources.so.17.0.0
+/usr/lib64/libkritaresourcewidgets.so.17
+/usr/lib64/libkritaresourcewidgets.so.17.0.0
+/usr/lib64/libkritastore.so.17
+/usr/lib64/libkritastore.so.17.0.0
+/usr/lib64/libkritaui.so.17
+/usr/lib64/libkritaui.so.17.0.0
+/usr/lib64/libkritaversion.so.17
+/usr/lib64/libkritaversion.so.17.0.0
+/usr/lib64/libkritawidgets.so.17
+/usr/lib64/libkritawidgets.so.17.0.0
+/usr/lib64/libkritawidgetutils.so.17
+/usr/lib64/libkritawidgetutils.so.17.0.0
 /usr/lib64/qt5/qml/org/krita/draganddrop/libdraganddropplugin.so
 /usr/lib64/qt5/qml/org/krita/draganddrop/qmldir
 /usr/lib64/qt5/qml/org/krita/sketch/components/BusyIndicator.qml
 /usr/lib64/qt5/qml/org/krita/sketch/components/Button.qml
+/usr/lib64/qt5/qml/org/krita/sketch/components/ButtonSquared.qml
 /usr/lib64/qt5/qml/org/krita/sketch/components/CategorySwitcher.qml
 /usr/lib64/qt5/qml/org/krita/sketch/components/CheckBox.qml
 /usr/lib64/qt5/qml/org/krita/sketch/components/ColorSwatch.qml
@@ -1358,12 +1414,27 @@ popd
 %defattr(0644,root,root,0755)
 /usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
 /usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
-/usr/share/package-licenses/krita/4577cbeb3556a519433c8f3b7476c74b55f7ef7a
+/usr/share/package-licenses/krita/20079e8f79713dce80ab09774505773c926afa2a
+/usr/share/package-licenses/krita/221e6be04f1b020e012e7bd9e9e39b86fda17ba2
+/usr/share/package-licenses/krita/2a638514c87c4923c0570c55822620fad56f2a33
+/usr/share/package-licenses/krita/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+/usr/share/package-licenses/krita/3c3d7573e137d48253731c975ecf90d74cfa9efe
+/usr/share/package-licenses/krita/557dcd723cf0fc1354fb34bd5528fdbe685a2e86
+/usr/share/package-licenses/krita/6091db0aead0d90182b93d3c0d09ba93d188f907
+/usr/share/package-licenses/krita/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
+/usr/share/package-licenses/krita/6f1f675aa5f6a2bbaa573b8343044b166be28399
+/usr/share/package-licenses/krita/757b86330df80f81143d5916b3e92b4bcb1b1890
+/usr/share/package-licenses/krita/7d9831e05094ce723947d729c2a46a09d6e90275
+/usr/share/package-licenses/krita/8287b608d3fa40ef401339fd907ca1260c964123
 /usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
 /usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
+/usr/share/package-licenses/krita/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
 /usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+/usr/share/package-licenses/krita/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3
 /usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
 /usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
+/usr/share/package-licenses/krita/e458941548e0864907e654fa2e192844ae90fc32
+/usr/share/package-licenses/krita/e712eadfab0d2357c0f50f599ef35ee0d87534cb
 /usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
 /usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
 
