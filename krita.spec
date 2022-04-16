@@ -6,7 +6,7 @@
 #
 Name     : krita
 Version  : 5.0.5
-Release  : 55
+Release  : 56
 URL      : https://download.kde.org/stable/krita/5.0.5/krita-5.0.5.tar.gz
 Source0  : https://download.kde.org/stable/krita/5.0.5/krita-5.0.5.tar.gz
 Source1  : https://download.kde.org/stable/krita/5.0.5/krita-5.0.5.tar.gz.sig
