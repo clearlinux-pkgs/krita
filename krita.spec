@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x4DA79EDA231C852B (foundation@krita.org)
 #
 Name     : krita
-Version  : 5.0.6
-Release  : 57
-URL      : https://download.kde.org/stable/krita/5.0.6/krita-5.0.6.tar.gz
-Source0  : https://download.kde.org/stable/krita/5.0.6/krita-5.0.6.tar.gz
-Source1  : https://download.kde.org/stable/krita/5.0.6/krita-5.0.6.tar.gz.sig
+Version  : 5.0.8
+Release  : 58
+URL      : https://download.kde.org/stable/krita/5.0.8/krita-5.0.8.tar.gz
+Source0  : https://download.kde.org/stable/krita/5.0.8/krita-5.0.8.tar.gz
+Source1  : https://download.kde.org/stable/krita/5.0.8/krita-5.0.8.tar.gz.sig
 Summary  : Open source painting program
 Group    : Development/Tools
 License  : Apache-2.0 BSD-2-Clause BSD-3-Clause BSL-1.0 CC-BY-SA-4.0 CC0-1.0 GPL-2.0 GPL-3.0 ISC LGPL-2.0 LGPL-2.1 LGPL-3.0 MIT Unlicense Zlib
@@ -128,15 +128,15 @@ locales components for the krita package.
 
 
 %prep
-%setup -q -n krita-5.0.6
-cd %{_builddir}/krita-5.0.6
+%setup -q -n krita-5.0.8
+cd %{_builddir}/krita-5.0.8
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1651172594
+export SOURCE_DATE_EPOCH=1653501369
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -152,40 +152,40 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1651172594
+export SOURCE_DATE_EPOCH=1653501369
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
-cp %{_builddir}/krita-5.0.6/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/krita-5.0.6/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
-cp %{_builddir}/krita-5.0.6/LICENSES/Apache-2.0.txt %{buildroot}/usr/share/package-licenses/krita/2b8b815229aa8a61e483fb4ba0588b8b6c491890
-cp %{_builddir}/krita-5.0.6/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/krita/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
-cp %{_builddir}/krita-5.0.6/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/krita/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
-cp %{_builddir}/krita-5.0.6/LICENSES/BSL-1.0.txt %{buildroot}/usr/share/package-licenses/krita/557dcd723cf0fc1354fb34bd5528fdbe685a2e86
-cp %{_builddir}/krita-5.0.6/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/krita/8287b608d3fa40ef401339fd907ca1260c964123
-cp %{_builddir}/krita-5.0.6/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/krita/2a638514c87c4923c0570c55822620fad56f2a33
-cp %{_builddir}/krita-5.0.6/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/e712eadfab0d2357c0f50f599ef35ee0d87534cb
-cp %{_builddir}/krita-5.0.6/LICENSES/GPL-3.0-only.txt %{buildroot}/usr/share/package-licenses/krita/6091db0aead0d90182b93d3c0d09ba93d188f907
-cp %{_builddir}/krita-5.0.6/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/6091db0aead0d90182b93d3c0d09ba93d188f907
-cp %{_builddir}/krita-5.0.6/LICENSES/ICS.txt %{buildroot}/usr/share/package-licenses/krita/221e6be04f1b020e012e7bd9e9e39b86fda17ba2
-cp %{_builddir}/krita-5.0.6/LICENSES/LGPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/krita/20079e8f79713dce80ab09774505773c926afa2a
-cp %{_builddir}/krita-5.0.6/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/20079e8f79713dce80ab09774505773c926afa2a
-cp %{_builddir}/krita-5.0.6/LICENSES/LGPL-2.1-only.txt %{buildroot}/usr/share/package-licenses/krita/3c3d7573e137d48253731c975ecf90d74cfa9efe
-cp %{_builddir}/krita-5.0.6/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/krita/6f1f675aa5f6a2bbaa573b8343044b166be28399
-cp %{_builddir}/krita-5.0.6/LICENSES/LGPL-3.0-only.txt %{buildroot}/usr/share/package-licenses/krita/757b86330df80f81143d5916b3e92b4bcb1b1890
-cp %{_builddir}/krita-5.0.6/LICENSES/LGPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/757b86330df80f81143d5916b3e92b4bcb1b1890
-cp %{_builddir}/krita-5.0.6/LICENSES/LicenseRef-KDE-Accepted-GPL.txt %{buildroot}/usr/share/package-licenses/krita/7d9831e05094ce723947d729c2a46a09d6e90275
-cp %{_builddir}/krita-5.0.6/LICENSES/LicenseRef-KDE-Accepted-GPL.txt %{buildroot}/usr/share/package-licenses/krita/7d9831e05094ce723947d729c2a46a09d6e90275
-cp %{_builddir}/krita-5.0.6/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/krita/e458941548e0864907e654fa2e192844ae90fc32
-cp %{_builddir}/krita-5.0.6/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/krita/e458941548e0864907e654fa2e192844ae90fc32
-cp %{_builddir}/krita-5.0.6/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/krita/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3
-cp %{_builddir}/krita-5.0.6/krita/data/aboutdata/LICENSE %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
-cp %{_builddir}/krita-5.0.6/krita/data/patterns/dith_license.txt %{buildroot}/usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
-cp %{_builddir}/krita-5.0.6/krita/integration/3rdparty/LICENSE %{buildroot}/usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
-cp %{_builddir}/krita-5.0.6/packaging/windows/installer/license_gpl-3.0.rtf %{buildroot}/usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
-cp %{_builddir}/krita-5.0.6/plugins/generators/simplexnoise/3rdparty/c-open-simplex/LICENSE %{buildroot}/usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
-cp %{_builddir}/krita-5.0.6/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
-cp %{_builddir}/krita-5.0.6/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
-cp %{_builddir}/krita-5.0.6/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/krita-5.0.8/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/krita-5.0.8/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/095d1f504f6fd8add73a4e4964e37f260f332b6a
+cp %{_builddir}/krita-5.0.8/LICENSES/Apache-2.0.txt %{buildroot}/usr/share/package-licenses/krita/2b8b815229aa8a61e483fb4ba0588b8b6c491890
+cp %{_builddir}/krita-5.0.8/LICENSES/BSD-2-Clause.txt %{buildroot}/usr/share/package-licenses/krita/680ed9349d3d12bd39ddd36e8c4bc6b1b0cb1c0e
+cp %{_builddir}/krita-5.0.8/LICENSES/BSD-3-Clause.txt %{buildroot}/usr/share/package-licenses/krita/9950d3fdce1cff1f71212fb5abd31453c6ee2f8c
+cp %{_builddir}/krita-5.0.8/LICENSES/BSL-1.0.txt %{buildroot}/usr/share/package-licenses/krita/557dcd723cf0fc1354fb34bd5528fdbe685a2e86
+cp %{_builddir}/krita-5.0.8/LICENSES/CC0-1.0.txt %{buildroot}/usr/share/package-licenses/krita/8287b608d3fa40ef401339fd907ca1260c964123
+cp %{_builddir}/krita-5.0.8/LICENSES/GPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/krita/2a638514c87c4923c0570c55822620fad56f2a33
+cp %{_builddir}/krita-5.0.8/LICENSES/GPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/e712eadfab0d2357c0f50f599ef35ee0d87534cb
+cp %{_builddir}/krita-5.0.8/LICENSES/GPL-3.0-only.txt %{buildroot}/usr/share/package-licenses/krita/6091db0aead0d90182b93d3c0d09ba93d188f907
+cp %{_builddir}/krita-5.0.8/LICENSES/GPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/6091db0aead0d90182b93d3c0d09ba93d188f907
+cp %{_builddir}/krita-5.0.8/LICENSES/ICS.txt %{buildroot}/usr/share/package-licenses/krita/221e6be04f1b020e012e7bd9e9e39b86fda17ba2
+cp %{_builddir}/krita-5.0.8/LICENSES/LGPL-2.0-only.txt %{buildroot}/usr/share/package-licenses/krita/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/krita-5.0.8/LICENSES/LGPL-2.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/20079e8f79713dce80ab09774505773c926afa2a
+cp %{_builddir}/krita-5.0.8/LICENSES/LGPL-2.1-only.txt %{buildroot}/usr/share/package-licenses/krita/3c3d7573e137d48253731c975ecf90d74cfa9efe
+cp %{_builddir}/krita-5.0.8/LICENSES/LGPL-2.1-or-later.txt %{buildroot}/usr/share/package-licenses/krita/6f1f675aa5f6a2bbaa573b8343044b166be28399
+cp %{_builddir}/krita-5.0.8/LICENSES/LGPL-3.0-only.txt %{buildroot}/usr/share/package-licenses/krita/757b86330df80f81143d5916b3e92b4bcb1b1890
+cp %{_builddir}/krita-5.0.8/LICENSES/LGPL-3.0-or-later.txt %{buildroot}/usr/share/package-licenses/krita/757b86330df80f81143d5916b3e92b4bcb1b1890
+cp %{_builddir}/krita-5.0.8/LICENSES/LicenseRef-KDE-Accepted-GPL.txt %{buildroot}/usr/share/package-licenses/krita/7d9831e05094ce723947d729c2a46a09d6e90275
+cp %{_builddir}/krita-5.0.8/LICENSES/LicenseRef-KDE-Accepted-GPL.txt %{buildroot}/usr/share/package-licenses/krita/7d9831e05094ce723947d729c2a46a09d6e90275
+cp %{_builddir}/krita-5.0.8/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/krita/e458941548e0864907e654fa2e192844ae90fc32
+cp %{_builddir}/krita-5.0.8/LICENSES/LicenseRef-KDE-Accepted-LGPL.txt %{buildroot}/usr/share/package-licenses/krita/e458941548e0864907e654fa2e192844ae90fc32
+cp %{_builddir}/krita-5.0.8/LICENSES/MIT.txt %{buildroot}/usr/share/package-licenses/krita/a0193e3fccf86c17dc71e3f6c0ac0b535e06bea3
+cp %{_builddir}/krita-5.0.8/krita/data/aboutdata/LICENSE %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
+cp %{_builddir}/krita-5.0.8/krita/data/patterns/dith_license.txt %{buildroot}/usr/share/package-licenses/krita/92ebac73a2c8c52b8a305df0311eb17a025a84c2
+cp %{_builddir}/krita-5.0.8/krita/integration/3rdparty/LICENSE %{buildroot}/usr/share/package-licenses/krita/b274cc52fd06db856281db3593167f8765c148c9
+cp %{_builddir}/krita-5.0.8/packaging/windows/installer/license_gpl-3.0.rtf %{buildroot}/usr/share/package-licenses/krita/b6f3908b5e9bfb4f93ffbd7a442bf38a75ccb44a
+cp %{_builddir}/krita-5.0.8/plugins/generators/simplexnoise/3rdparty/c-open-simplex/LICENSE %{buildroot}/usr/share/package-licenses/krita/fad0fbaf831fead007f4465821459c58a2973eb0
+cp %{_builddir}/krita-5.0.8/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647
+cp %{_builddir}/krita-5.0.8/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987
+cp %{_builddir}/krita-5.0.8/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
