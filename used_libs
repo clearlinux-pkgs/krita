@@ -1,4 +1,4 @@
-libImath-3_0.so.28
+libImath-3_1.so.29
 libKF5Completion.so.5
 libKF5ConfigCore.so.5
 libKF5ConfigGui.so.5
@@ -10,7 +10,7 @@ libKF5ItemViews.so.5
 libKF5WidgetsAddons.so.5
 libKF5WindowSystem.so.5
 libOpenColorIO.so.1
-libOpenEXR-3_0.so.29
+libOpenEXR-3_1.so.30
 libQt5Core.so.5
 libQt5DBus.so.5
 libQt5Gui.so.5

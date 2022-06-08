@@ -6,7 +6,7 @@
 #
 Name     : krita
 Version  : 5.0.8
-Release  : 58
+Release  : 59
 URL      : https://download.kde.org/stable/krita/5.0.8/krita-5.0.8.tar.gz
 Source0  : https://download.kde.org/stable/krita/5.0.8/krita-5.0.8.tar.gz
 Source1  : https://download.kde.org/stable/krita/5.0.8/krita-5.0.8.tar.gz.sig
@@ -136,7 +136,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1653501369
+export SOURCE_DATE_EPOCH=1654724246
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -152,7 +152,7 @@ make  %{?_smp_mflags}
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1653501369
+export SOURCE_DATE_EPOCH=1654724246
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
 cp %{_builddir}/krita-5.0.8/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02
