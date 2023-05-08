@@ -1,11 +1,13 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
 PyQt5
-cmake(Vc)
 Vc-dev
 Vc-staticdev
+cmake(Vc)
 eigen-dev
 exiv2-dev
 poppler-dev
+pypi(pyqt5_sip)
+pypi(pyqtbuild)
 quazip-dev
-sip-dev
+sip
