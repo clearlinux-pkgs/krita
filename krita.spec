@@ -7,7 +7,7 @@
 #
 Name     : krita
 Version  : 5.0.8
-Release  : 72
+Release  : 73
 URL      : https://download.kde.org/stable/krita/5.0.8/krita-5.0.8.tar.gz
 Source0  : https://download.kde.org/stable/krita/5.0.8/krita-5.0.8.tar.gz
 Source1  : https://download.kde.org/stable/krita/5.0.8/krita-5.0.8.tar.gz.sig
@@ -138,7 +138,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683570854
+export SOURCE_DATE_EPOCH=1686938241
 mkdir -p clr-build
 pushd clr-build
 export GCC_IGNORE_WERROR=1
@@ -152,9 +152,26 @@ export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=auto "
 %cmake ..
 make  %{?_smp_mflags}
 popd
+mkdir -p clr-build-avx2
+pushd clr-build-avx2
+export GCC_IGNORE_WERROR=1
+export AR=gcc-ar
+export RANLIB=gcc-ranlib
+export NM=gcc-nm
+export CFLAGS="$CFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
+export FCFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
+export FFLAGS="$FFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -O3 -Wl,-z,x86-64-v3 -ffat-lto-objects -flto=auto -march=x86-64-v3 "
+export CFLAGS="$CFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export CXXFLAGS="$CXXFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FFLAGS="$FFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+export FCFLAGS="$FCFLAGS -march=x86-64-v3 -m64 -Wl,-z,x86-64-v3"
+%cmake ..
+make  %{?_smp_mflags}
+popd
 
 %install
-export SOURCE_DATE_EPOCH=1683570854
+export SOURCE_DATE_EPOCH=1686938241
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/krita
 cp %{_builddir}/krita-%{version}/COPYING %{buildroot}/usr/share/package-licenses/krita/8624bcdae55baeef00cd11d5dfcfa60f68710a02 || :
@@ -188,10 +205,14 @@ cp %{_builddir}/krita-%{version}/plugins/generators/simplexnoise/3rdparty/c-open
 cp %{_builddir}/krita-%{version}/plugins/impex/raw/3rdparty/libkdcraw/COPYING %{buildroot}/usr/share/package-licenses/krita/133efad5329acf364135c569ac01ec084c3d4647 || :
 cp %{_builddir}/krita-%{version}/plugins/impex/raw/3rdparty/libkdcraw/COPYING-CMAKE-SCRIPTS %{buildroot}/usr/share/package-licenses/krita/ff3ed70db4739b3c6747c7f624fe2bad70802987 || :
 cp %{_builddir}/krita-%{version}/plugins/impex/raw/3rdparty/libkdcraw/COPYING.LIB %{buildroot}/usr/share/package-licenses/krita/9a1929f4700d2407c70b507b3b2aaf6226a9543c || :
+pushd clr-build-avx2
+%make_install_v3  || :
+popd
 pushd clr-build
 %make_install
 popd
 %find_lang krita
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot} %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -216,6 +237,9 @@ popd
 
 %files bin
 %defattr(-,root,root,-)
+/V3/usr/bin/krita
+/V3/usr/bin/krita_version
+/V3/usr/bin/kritarunner
 /usr/bin/AppImageUpdateDummy
 /usr/bin/krita
 /usr/bin/krita_version
@@ -1186,6 +1210,182 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
+/V3/usr/lib64/krita-python-libs/PyKrita/krita.so
+/V3/usr/lib64/kritaplugins/krita_colorspaces_extensions.so
+/V3/usr/lib64/kritaplugins/krita_flaketools.so
+/V3/usr/lib64/kritaplugins/krita_karbontools.so
+/V3/usr/lib64/kritaplugins/krita_raw_import.so
+/V3/usr/lib64/kritaplugins/krita_shape_image.so
+/V3/usr/lib64/kritaplugins/krita_shape_paths.so
+/V3/usr/lib64/kritaplugins/krita_tool_svgtext.so
+/V3/usr/lib64/kritaplugins/kritaanimationdocker.so
+/V3/usr/lib64/kritaplugins/kritaarrangedocker.so
+/V3/usr/lib64/kritaplugins/kritaartisticcolorselector.so
+/V3/usr/lib64/kritaplugins/kritaasccdl.so
+/V3/usr/lib64/kritaplugins/kritaassistanttool.so
+/V3/usr/lib64/kritaplugins/kritablurfilter.so
+/V3/usr/lib64/kritaplugins/kritabrushexport.so
+/V3/usr/lib64/kritaplugins/kritabrushimport.so
+/V3/usr/lib64/kritaplugins/kritabuginfo.so
+/V3/usr/lib64/kritaplugins/kritachanneldocker.so
+/V3/usr/lib64/kritaplugins/kritaclonesarray.so
+/V3/usr/lib64/kritaplugins/kritacolorgenerator.so
+/V3/usr/lib64/kritaplugins/kritacolorrange.so
+/V3/usr/lib64/kritaplugins/kritacolorselectorng.so
+/V3/usr/lib64/kritaplugins/kritacolorsfilters.so
+/V3/usr/lib64/kritaplugins/kritacolorsmudgepaintop.so
+/V3/usr/lib64/kritaplugins/kritacolorspaceconversion.so
+/V3/usr/lib64/kritaplugins/kritacompositiondocker.so
+/V3/usr/lib64/kritaplugins/kritaconvertheighttonormalmap.so
+/V3/usr/lib64/kritaplugins/kritaconvolutionfilters.so
+/V3/usr/lib64/kritaplugins/kritacsvexport.so
+/V3/usr/lib64/kritaplugins/kritacsvimport.so
+/V3/usr/lib64/kritaplugins/kritacurvepaintop.so
+/V3/usr/lib64/kritaplugins/kritadbexplorer.so
+/V3/usr/lib64/kritaplugins/kritadefaultpaintops.so
+/V3/usr/lib64/kritaplugins/kritadefaulttools.so
+/V3/usr/lib64/kritaplugins/kritadeformpaintop.so
+/V3/usr/lib64/kritaplugins/kritadigitalmixer.so
+/V3/usr/lib64/kritaplugins/kritadodgeburn.so
+/V3/usr/lib64/kritaplugins/kritaedgedetection.so
+/V3/usr/lib64/kritaplugins/kritaembossfilter.so
+/V3/usr/lib64/kritaplugins/kritaexample.so
+/V3/usr/lib64/kritaplugins/kritaexperimentpaintop.so
+/V3/usr/lib64/kritaplugins/kritaexrexport.so
+/V3/usr/lib64/kritaplugins/kritaexrimport.so
+/V3/usr/lib64/kritaplugins/kritaextensioncolorsfilters.so
+/V3/usr/lib64/kritaplugins/kritafastcolortransferfilter.so
+/V3/usr/lib64/kritaplugins/kritafilterop.so
+/V3/usr/lib64/kritaplugins/kritagamutmask.so
+/V3/usr/lib64/kritaplugins/kritagaussianhighpassfilter.so
+/V3/usr/lib64/kritaplugins/kritagradientgenerator.so
+/V3/usr/lib64/kritaplugins/kritagradientmap.so
+/V3/usr/lib64/kritaplugins/kritagriddocker.so
+/V3/usr/lib64/kritaplugins/kritagridpaintop.so
+/V3/usr/lib64/kritaplugins/kritahairypaintop.so
+/V3/usr/lib64/kritaplugins/kritahalftone.so
+/V3/usr/lib64/kritaplugins/kritahatchingpaintop.so
+/V3/usr/lib64/kritaplugins/kritaheightmapexport.so
+/V3/usr/lib64/kritaplugins/kritaheightmapimport.so
+/V3/usr/lib64/kritaplugins/kritahistogramdocker.so
+/V3/usr/lib64/kritaplugins/kritahistorydocker.so
+/V3/usr/lib64/kritaplugins/kritaimageenhancement.so
+/V3/usr/lib64/kritaplugins/kritaimagesplit.so
+/V3/usr/lib64/kritaplugins/kritaindexcolors.so
+/V3/usr/lib64/kritaplugins/kritajp2import.so
+/V3/usr/lib64/kritaplugins/kritajpegexport.so
+/V3/usr/lib64/kritaplugins/kritajpegimport.so
+/V3/usr/lib64/kritaplugins/kritakraexport.so
+/V3/usr/lib64/kritaplugins/kritakraimport.so
+/V3/usr/lib64/kritaplugins/kritakrzexport.so
+/V3/usr/lib64/kritaplugins/kritalayerdocker.so
+/V3/usr/lib64/kritaplugins/kritalayergroupswitcher.so
+/V3/usr/lib64/kritaplugins/kritalayersplit.so
+/V3/usr/lib64/kritaplugins/kritalcmsengine.so
+/V3/usr/lib64/kritaplugins/kritalevelfilter.so
+/V3/usr/lib64/kritaplugins/kritalogdocker.so
+/V3/usr/lib64/kritaplugins/kritalutdocker.so
+/V3/usr/lib64/kritaplugins/kritametadataeditor.so
+/V3/usr/lib64/kritaplugins/kritamodifyselection.so
+/V3/usr/lib64/kritaplugins/kritamultigridpatterngenerator.so
+/V3/usr/lib64/kritaplugins/kritamypaintop.so
+/V3/usr/lib64/kritaplugins/kritanoisefilter.so
+/V3/usr/lib64/kritaplugins/kritanormalize.so
+/V3/usr/lib64/kritaplugins/kritaoffsetimage.so
+/V3/usr/lib64/kritaplugins/kritaoilpaintfilter.so
+/V3/usr/lib64/kritaplugins/kritaoraexport.so
+/V3/usr/lib64/kritaplugins/kritaoraimport.so
+/V3/usr/lib64/kritaplugins/kritaoverviewdocker.so
+/V3/usr/lib64/kritaplugins/kritapalettedocker.so
+/V3/usr/lib64/kritaplugins/kritapalettize.so
+/V3/usr/lib64/kritaplugins/kritaparticlepaintop.so
+/V3/usr/lib64/kritaplugins/kritapatterndocker.so
+/V3/usr/lib64/kritaplugins/kritapatterngenerator.so
+/V3/usr/lib64/kritaplugins/kritapdfimport.so
+/V3/usr/lib64/kritaplugins/kritaphongbumpmap.so
+/V3/usr/lib64/kritaplugins/kritapixelizefilter.so
+/V3/usr/lib64/kritaplugins/kritapngexport.so
+/V3/usr/lib64/kritaplugins/kritapngimport.so
+/V3/usr/lib64/kritaplugins/kritaposterize.so
+/V3/usr/lib64/kritaplugins/kritapresetdocker.so
+/V3/usr/lib64/kritaplugins/kritapresethistory.so
+/V3/usr/lib64/kritaplugins/kritapsdexport.so
+/V3/usr/lib64/kritaplugins/kritapsdimport.so
+/V3/usr/lib64/kritaplugins/kritapykrita.so
+/V3/usr/lib64/kritaplugins/kritaqimageioexport.so
+/V3/usr/lib64/kritaplugins/kritaqimageioimport.so
+/V3/usr/lib64/kritaplugins/kritaqmic.so
+/V3/usr/lib64/kritaplugins/kritaqmlexport.so
+/V3/usr/lib64/kritaplugins/kritaraindropsfilter.so
+/V3/usr/lib64/kritaplugins/kritarandompickfilter.so
+/V3/usr/lib64/kritaplugins/kritarecorderdocker.so
+/V3/usr/lib64/kritaplugins/kritaresourcemanager.so
+/V3/usr/lib64/kritaplugins/kritarotateimage.so
+/V3/usr/lib64/kritaplugins/kritaroundcornersfilter.so
+/V3/usr/lib64/kritaplugins/kritaroundmarkerpaintop.so
+/V3/usr/lib64/kritaplugins/kritascreentonegenerator.so
+/V3/usr/lib64/kritaplugins/kritaselectiontools.so
+/V3/usr/lib64/kritaplugins/kritaseparatechannels.so
+/V3/usr/lib64/kritaplugins/kritashearimage.so
+/V3/usr/lib64/kritaplugins/kritasimplexnoisegenerator.so
+/V3/usr/lib64/kritaplugins/kritasketchpaintop.so
+/V3/usr/lib64/kritaplugins/kritasmallcolorselector.so
+/V3/usr/lib64/kritaplugins/kritasmalltilesfilter.so
+/V3/usr/lib64/kritaplugins/kritasnapshotdocker.so
+/V3/usr/lib64/kritaplugins/kritaspecificcolorselector.so
+/V3/usr/lib64/kritaplugins/kritaspraypaintop.so
+/V3/usr/lib64/kritaplugins/kritaspriterexport.so
+/V3/usr/lib64/kritaplugins/kritastoryboarddocker.so
+/V3/usr/lib64/kritaplugins/kritasvgcollectiondocker.so
+/V3/usr/lib64/kritaplugins/kritasvgimport.so
+/V3/usr/lib64/kritaplugins/kritatangentnormalpaintop.so
+/V3/usr/lib64/kritaplugins/kritatasksetdocker.so
+/V3/usr/lib64/kritaplugins/kritatgaexport.so
+/V3/usr/lib64/kritaplugins/kritatgaimport.so
+/V3/usr/lib64/kritaplugins/kritathreshold.so
+/V3/usr/lib64/kritaplugins/kritatiffexport.so
+/V3/usr/lib64/kritaplugins/kritatiffimport.so
+/V3/usr/lib64/kritaplugins/kritatoolSmartPatch.so
+/V3/usr/lib64/kritaplugins/kritatoolcrop.so
+/V3/usr/lib64/kritaplugins/kritatooldyna.so
+/V3/usr/lib64/kritaplugins/kritatoollazybrush.so
+/V3/usr/lib64/kritaplugins/kritatoolpolygon.so
+/V3/usr/lib64/kritaplugins/kritatoolpolyline.so
+/V3/usr/lib64/kritaplugins/kritatooltransform.so
+/V3/usr/lib64/kritaplugins/kritatouchdocker.so
+/V3/usr/lib64/kritaplugins/kritaunsharpfilter.so
+/V3/usr/lib64/kritaplugins/kritawavefilter.so
+/V3/usr/lib64/kritaplugins/kritawaveletdecompose.so
+/V3/usr/lib64/kritaplugins/kritawebpexport.so
+/V3/usr/lib64/kritaplugins/kritawebpimport.so
+/V3/usr/lib64/kritaplugins/kritaxcfimport.so
+/V3/usr/lib64/libkritabasicflakes.so.17.0.0
+/V3/usr/lib64/libkritacolor.so.17.0.0
+/V3/usr/lib64/libkritacolord.so.17.0.0
+/V3/usr/lib64/libkritacommand.so.17.0.0
+/V3/usr/lib64/libkritaflake.so.17.0.0
+/V3/usr/lib64/libkritaglobal.so.17.0.0
+/V3/usr/lib64/libkritaimage.so.17.0.0
+/V3/usr/lib64/libkritaimpex.so.17.0.0
+/V3/usr/lib64/libkritalibbrush.so.17.0.0
+/V3/usr/lib64/libkritalibkis.so.17.0.0
+/V3/usr/lib64/libkritalibkra.so.17.0.0
+/V3/usr/lib64/libkritalibpaintop.so.17.0.0
+/V3/usr/lib64/libkritametadata.so.17.0.0
+/V3/usr/lib64/libkritapigment.so.17.0.0
+/V3/usr/lib64/libkritaplugin.so.17.0.0
+/V3/usr/lib64/libkritapsd.so.17.0.0
+/V3/usr/lib64/libkritaqmicinterface.so.17.0.0
+/V3/usr/lib64/libkritaqml.so.17.0.0
+/V3/usr/lib64/libkritaresources.so.17.0.0
+/V3/usr/lib64/libkritaresourcewidgets.so.17.0.0
+/V3/usr/lib64/libkritastore.so.17.0.0
+/V3/usr/lib64/libkritaui.so.17.0.0
+/V3/usr/lib64/libkritaversion.so.17.0.0
+/V3/usr/lib64/libkritawidgets.so.17.0.0
+/V3/usr/lib64/libkritawidgetutils.so.17.0.0
+/V3/usr/lib64/qt5/qml/org/krita/draganddrop/libdraganddropplugin.so
+/V3/usr/lib64/qt5/qml/org/krita/sketch/libkritasketchplugin.so
 /usr/lib64/krita-python-libs/PyKrita/krita.so
 /usr/lib64/kritaplugins/krita_colorspaces_extensions.so
 /usr/lib64/kritaplugins/krita_flaketools.so
